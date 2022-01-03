@@ -16,3 +16,11 @@ body {
 .textDisable {
     color: rgba(0, 0, 0, 0.38);
 }
+
+.fw-semibold {
+    font-weight: 500 !important;
+}
+
+.text-disabled {
+    color: rgba(0, 0, 0, 0.38) !important;
+}

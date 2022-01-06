@@ -1,0 +1,39 @@
+.menu{
+    background-color: white;
+    box-shadow: 10px 10px 20px -7px rgba(0,0,0,0.08); 
+    width : 100%;
+    height : 25%;
+    position : fixed;
+    top : 10;
+    right : -100%;
+    transition: 850ms;
+    display : flex;
+}
+
+.active {
+    right: 0%;
+    transition: 850ms;
+}
+
+.side-menu{
+    width: 100%;
+    height:100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.x-icon{
+    display: flex;
+    justify-content: end;
+    margin: 4px 1% 4%;
+}
+
+.menu-item a : hover{
+    color: #71A7F2;
+}
+
+.toogler {
+    margin-top : -10%;
+}

@@ -1,11 +1,17 @@
-import Button from "./components/button";
+import React from "react";
+import Footer from "./layout/Footer";
+import Navbar from "./layout/Navbar";
+import AppRoutes from "./router";
 
-function App(props) {
+function App() {
   return (
-    <div className="container fs-h3 fw-bold text-primary-3">
-      <Button value={`Ini Button`}/>
-      <Button disabled value={`Ini Button`}/>
-      <Button nofill value={`Ini Button`}/>
+    <div className="container fs-h3 text-primary-3">
+      <Navbar/>
+        <AppRoutes/>
+      <Footer/>
+      <Footer/>
+      <Footer/>
+      <Footer/>
     </div>
   );
 }

@@ -20,7 +20,7 @@ export default function Navbar() {
     return (
         <>
             {/* pathname === '/ ' harus diganti jadi `!islogged in kalo` bagian be login beres*/}
-            <nav className={pathname === '/' | pathname === '/daftar' | pathname === '/masuk'? 'sticky bg-white' : width >= 768 ? 'sticky bg-white' : 'sticky-bottom bg-white fixed-bottom'}>
+            <nav className={pathname === '/' | pathname === '/daftar' | pathname === '/masuk'? 'fixed-top bg-white' : width >= 768 ? 'fixed-top bg-white' : 'bg-white fixed-bottom'}>
                 <div className={pathname === '/' ? '' : pathname === '/daftar' | pathname === '/masuk' ? 'p-3' : 'd-md-none d-block border-top shadow'}/>
                 <div className='d-block d-sm-none'/>
                 <Container className='d-block d-md-flex justify-content-between flex-wrap'>
@@ -33,10 +33,10 @@ export default function Navbar() {
                         // When user logout
                             <Row className='d-flex align-items-center justify-content-around d-none d-md-flex'>
                                 <Col className='col-4'>
-                                    <a className='text-decoration-none text-active' href='#cara-kerja'>Cara Kerja?</a>
+                                    <a className='text-decoration-none text-active' href='#caraKerja'>Cara Kerja?</a>
                                 </Col>
                                 <Col className='col-4'>
-                                    <a className='text-decoration-none text-active' href='#apa-itu-vitq'>Apa itu VitQ?</a>
+                                    <a className='text-decoration-none text-active' href='#introduction'>Apa itu VitQ?</a>
                                 </Col>
                                 <Col className='col-2 d-flex align-items-center'>
                                     <NavLink to='/masuk'>

@@ -9,9 +9,6 @@ function App() {
       <Navbar/>
         <AppRoutes/>
       <Footer/>
-      <Footer/>
-      <Footer/>
-      <Footer/>
     </div>
   );
 }

@@ -10,7 +10,7 @@
     border:solid black 0.1;
 }
 
-.sticky {
+/* .sticky {
     position: -webkit-sticky;
     position: sticky;
     top: 0;
@@ -20,7 +20,7 @@
     position: -webkit-sticky;
     position: sticky;
     bottom: 0;
-}
+} */
 
 
 .nav-icon svg:hover path{

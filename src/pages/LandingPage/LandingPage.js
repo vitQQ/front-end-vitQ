@@ -17,7 +17,7 @@ export default function LandingPage(){
         // <Layouts>
             <div className="container text-black">
                 {/*landing page*/}
-                <div className="row d-flex justify-content-between my-5 align-items-center" id="landingPage">
+                <div className="row d-flex justify-content-between py-5 mt-5 align-items-center" id="landingPage">
                     <div className="col-lg-6 col-md-12 col-sm-12 g-lg-5 g-sm-3 g-xs-3 text-lg-start text-xl-start text-xxl-start text-center">
                         <h1 className="fs-display fw-bold">Jaga <span className="text-secondary-2">Kesehatanmu</span> dan Jaga <span className="text-primary-2">Planetmu</span></h1>
                         <p className="fs-body my-xxl-5 my-xl-5 my-lg-5 my-md-3 my-5">Ayo, Hitung kalorimu, sekaligus menghitung besaran emisimu pada dunia dan selamatkan mereka</p>

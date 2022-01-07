@@ -8,8 +8,6 @@ import kalkulasiDanDampakPic from "./assets/kalkukasidandampak.svg"
 import pilihMakananPic from "./assets/pilihMakanan.svg"
 import logoKemenkesPic from "./assets/logoKemenkes.png"
 import logoGermasPic from "./assets/logoGermas.png"
-// import { Divide } from "react-feather";
-// import Layouts from "./../../layout";
 import Button from "./../../components/button";
 
 export default function LandingPage(){

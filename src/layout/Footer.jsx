@@ -4,7 +4,7 @@ import "./styles/footer.css";
 
 export default function Footer() {
   return (
-    <div className="mt-auto bg-primary-1 fs-subtitle">
+    <div className="mt-auto pb-5 bg-primary-1 fs-subtitle">
       <div className="py-5 container text-active">
         <Row className="mb-3 mb-sm-5 footerLink">
           <Col sm={4} lg={4} md={4} xs={6}>

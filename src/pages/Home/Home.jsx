@@ -9,6 +9,8 @@ import gambar from "./assets/aktivitas.png";
 import {Link} from 'react-router-dom'
 
 export default function Home() {
+  const time = new Date().getHours()
+  console.log(time)
   return (
     <Container fluid className="px-0">
       <div className="mt-5 py-md-5">
@@ -19,7 +21,7 @@ export default function Home() {
                 <Row>
                   <Col>
                     <div className="text-active fs-h3 fw-semibold">
-                      Selamat Pagi
+                      {time < 10 ? "Selamat Pagi" : time < 14 ? "Selamat Siang" : time < 18 ? "Selamat Sore" : "Selamat Malam"}
                     </div>
                     <div className="text-active fs-h2 fw-bold mb-3">
                       Apa yang ingin kamu lakukan?

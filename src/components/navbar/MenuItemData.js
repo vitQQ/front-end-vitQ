@@ -1,5 +1,6 @@
 export const MenuItemsData = [
     {
+        id:1,
         title : 'Beranda',
         path : '/home',
         svg : {
@@ -19,6 +20,7 @@ export const MenuItemsData = [
         }
     },
     {
+        id:2,
         title : 'Kalkulasi',
         path : '/kalkulasi',
         svg : {

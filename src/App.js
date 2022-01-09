@@ -4,7 +4,7 @@ import AppRoutes from "./router";
 
 function App() {
   return (
-    <div className="container fs-h3 text-primary-3">
+    <div>
       <Layout>
         <AppRoutes/>
       </Layout>

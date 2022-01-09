@@ -3,7 +3,7 @@ import { useState } from "react";
 import { BiMenu, BiX } from "react-icons/bi";
 import { NavLink } from "react-bootstrap";
 import Button from "../button";
-import '../../styles/sidebar.css';
+import './sidebar.css';
 import { useLocation } from "react-router";
 
 export default function Sidebar(){
@@ -20,9 +20,6 @@ export default function Sidebar(){
                 </div>
                 <div className={sidebar? 'menu active' : 'menu'}>
                     <div className="side-menu">
-                        {/* <div className="x-icon" onClick={showSidebar}>
-                            <BiX size={40}></BiX>
-                        </div> */}
                         <div className="menu-item">
                             <a onClick={showSidebar} className='text-decoration-none text-active menu-item' href='#cara-kerja'>Cara Kerja?</a>
                         </div>

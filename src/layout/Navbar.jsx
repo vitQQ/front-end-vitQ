@@ -24,7 +24,7 @@ export default function Navbar() {
                 <div className={pathname === '/' ? '' : pathname === '/daftar' | pathname === '/masuk' ? 'p-3' : 'd-md-none d-block border-top shadow'}/>
                 <div className='d-block d-sm-none'/>
                 <Container className='d-block d-md-flex justify-content-between flex-wrap'>
-                    <div className={ pathname === '/' | pathname === '/daftar' | pathname === '/masuk'? "d-flex align-items-center p-2" : "d-flex align-items-center d-none d-md-block p-2"}>
+                    <div className={ pathname === '/' | pathname === '/daftar' | pathname === '/masuk'? "d-flex align-items-center p-2" : "d-none d-md-flex align-items-center p-2"}>
                         <Logo/>
                     </div>
                     <div>
@@ -52,14 +52,14 @@ export default function Navbar() {
                         :
                         // Check is sign-in or sign up page ?
                         pathname === '/masuk' | pathname=== '/daftar'? 
-                        <div>
+                        <div className={width>768? "pt-2" : "d-flex justify-content-end reg-log"}>
                             <Row className='d-flex align-items-center justify-content-around'>
                                 <Col className={pathname=== '/daftar' ? 'd-none' : 'd-flex'}>
                                     <NavLink to='/daftar' className='text-decoration-none text-active'>Daftar</NavLink>
                                 </Col>
                                 <Col className='d-flex'>
                                     <NavLink to='/' className='text-decoration-none text-active nav-icon d-flex align-items-center'>
-                                        <p className= "text-inactive nav-item m-2">Beranda</p>
+                                        <p className= "text-inactive nav-item m-2 align-items-end">Beranda</p>
                                         <HomeIcon className='mb-2'/>
                                     </NavLink>
                                 </Col>

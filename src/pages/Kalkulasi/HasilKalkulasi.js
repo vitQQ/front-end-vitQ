@@ -13,8 +13,8 @@ export default function HasilKalkulasi(){
     let {pathname} = useLocation()
     console.log(pathname)
     return(
-        <div className={width>750? "m-4 py-5 text-active" : "my-4 text-active"}>
-            <div className={width>750?"my-3 p-4" : "m-3 pt-1"}>
+        <div className={width>750? "m-4 py-5" : "my-3 px-3"}>
+            <div className={width>750?"mt-3 pt-4 px-4" : "mx-3 pt-1"}>
                 <Link to="/kalkulasi" className="text-decoration-none">
                     <div className="text-primary d-flex justify-content-start align-content-center mb-2 border-1">
                         <Col className="d-flex align-items-center">
@@ -23,7 +23,7 @@ export default function HasilKalkulasi(){
                         <Col className="col-6 col-md-12 px-md-3 d-flex justify-content-center justify-content-md-start align-items-center mt-1 pt-1">
                             <h5 className="fs-body fw-bold">Kembali</h5>
                         </Col>
-                        <Col className="d-flex justify-content-end d-md-none text-inactive"><IoHelpCircleOutline/></Col>
+                        <Col className="d-flex justify-content-end d-md-none text-inactive pt-2"><IoHelpCircleOutline/></Col>
                     </div>
                 </Link>
             </div>

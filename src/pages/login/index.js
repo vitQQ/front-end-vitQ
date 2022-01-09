@@ -55,7 +55,7 @@ export  default function Login(){
                     </form>
                 </div>
                 <div className="col-9 col-xxl-7 col-xl-7 col-lg-7 m-auto my-5">
-                    <img className="w-100" src={daftarPic} alt="login picture" />
+                    <img className="w-100" src={daftarPic} alt="loginpicture" />
                 </div>
             </div>
         </div>

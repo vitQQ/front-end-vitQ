@@ -34,7 +34,7 @@ export  default function Daftar(){
                         </Link>
                     </div>
                     <p className="text-inactive fs-body text-center">Sudah punya akun?
-                         <Link to={`/`}>
+                         <Link to={`/masuk`}>
                             Masuk
                          </Link>
                     </p>

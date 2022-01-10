@@ -25,13 +25,11 @@
 }
 
 .x-icon{
-    display: flex;
-    justify-content: end;
     margin: 4px 1% 4%;
 }
 
 .menu-item a : hover{
-    color: #71A7F2;
+    color: primary-3;
 }
 
 .toogler {

@@ -20,46 +20,46 @@ export default function Navbar() {
     return (
         <>
             {/* pathname === '/ ' harus diganti jadi `!islogged in kalo` bagian be login beres*/}
-            <nav className={pathname === '/' | pathname === '/daftar' | pathname === '/masuk'? 'fixed-top bg-white' : width >= 768 ? 'fixed-top bg-white' : 'bg-white fixed-bottom'}>
+            <nav className={pathname === '/' | pathname === '/daftar' | pathname === '/masuk'? 'fixed-top bg-white' : width > 768 ? 'fixed-top bg-white' : 'bg-white fixed-bottom'}>
                 <div className={pathname === '/' ? '' : pathname === '/daftar' | pathname === '/masuk' ? 'p-3' : 'd-md-none d-block border-top shadow'}/>
                 <div className='d-block d-sm-none'/>
                 <Container className='d-block d-md-flex justify-content-between flex-wrap'>
-                    <div className={ pathname === '/' | pathname === '/daftar' | pathname === '/masuk'? "d-flex align-items-center p-2" : "d-flex align-items-center d-none d-md-block p-2"}>
+                    <div className={ pathname === '/' | pathname === '/daftar' | pathname === '/masuk'? "d-flex align-items-center p-2" : "d-none d-md-flex align-items-center p-2"}>
                         <Logo/>
                     </div>
                     <div>
                         <Sidebar/>
                         { pathname === '/'? 
                         // When user logout
-                            <Row className='d-flex align-items-center justify-content-around d-none d-md-flex'>
-                                <Col className='col-4'>
-                                    <a className='text-decoration-none text-active' href='#caraKerja'>Cara Kerja?</a>
-                                </Col>
-                                <Col className='col-4'>
-                                    <a className='text-decoration-none text-active' href='#introduction'>Apa itu VitQ?</a>
-                                </Col>
-                                <Col className='col-2 d-flex align-items-center'>
-                                    <NavLink to='/masuk'>
-                                        <Button nofill value={`Masuk`}/>
-                                    </NavLink>
-                                </Col>
-                                <Col className='col-2 d-flex align-items-center'>
-                                    <NavLink to='/daftar'>
-                                        <Button value={`Daftar`}/>
-                                    </NavLink>
-                                </Col>
-                            </Row>
+                        <Row className='d-flex align-items-center justify-content-around d-none d-md-flex'>
+                            <Col className='col-4'>
+                                <a className='text-decoration-none text-active' href='#caraKerja'>Cara Kerja?</a>
+                            </Col>
+                            <Col className='col-4'>
+                                <a className='text-decoration-none text-active' href='#introduction'>Apa itu VitQ?</a>
+                            </Col>
+                            <Col className='col-2 d-flex align-items-center'>
+                                <NavLink to='/masuk'>
+                                    <Button nofill value={`Masuk`}/>
+                                </NavLink>
+                            </Col>
+                            <Col className='col-2 d-flex align-items-center'>
+                                <NavLink to='/daftar'>
+                                    <Button value={`Daftar`}/>
+                                </NavLink>
+                            </Col>
+                        </Row>
                         :
                         // Check is sign-in or sign up page ?
                         pathname === '/masuk' | pathname=== '/daftar'? 
-                        <div>
+                        <div className={width>768? "pt-2" : "d-flex justify-content-end reg-log"}>
                             <Row className='d-flex align-items-center justify-content-around'>
                                 <Col className={pathname=== '/daftar' ? 'd-none' : 'd-flex'}>
                                     <NavLink to='/daftar' className='text-decoration-none text-active'>Daftar</NavLink>
                                 </Col>
                                 <Col className='d-flex'>
                                     <NavLink to='/' className='text-decoration-none text-active nav-icon d-flex align-items-center'>
-                                        <p className= "text-inactive nav-item m-2">Beranda</p>
+                                        <p className= "text-inactive nav-item m-2 align-items-end">Beranda</p>
                                         <HomeIcon className='mb-2'/>
                                     </NavLink>
                                 </Col>
@@ -69,14 +69,14 @@ export default function Navbar() {
                         // When user logged in
                         <div className='navbar d-flex justify-content-center mt-2'>
                             {MenuItemsData.map(item =>
-                                <Col>
-                                    <NavLink to={item?.path} className='d-block d-md-flex justify-content-center justify-content-md-between text-decoration-none text-inactive fst-normal mx-2'>
-                                        <div className='d-flex d-md-block justify-content-center mx-1'>
+                                <Col key={item?.id}>
+                                    <NavLink to={item?.path} className='d-block d-md-flex justify-content-center justify-content-md-between text-decoration-none text-inactive fst-normal mx-2' key={item?.id}>
+                                        <div className='d-flex d-md-block justify-content-center mx-1' key={item?.id}>
                                             {item?.title === 'Profile' ?                                         <FiCircle fill="#F5F9FF" color={pathname.includes(item?.path) ? "#0F4187":"#BCBCBC"} size={24}/>  
                                             :
                                             <svg width={item?.svg?.width} height={item?.svg?.height} viewBox={item?.svg?.viewBox} fill={item?.svg?.fill} xmlns={item?.svg?.xmlns}>
                                                 <path d={item?.pathIcon?.d?.toString()} fill={pathname?.includes(item?.path) ?item?.pathIcon?.fill[0] : item?.pathIcon?.fill[1]} stroke={pathname?.includes(item?.path) ? item?.pathIcon?.stroke[0] : item?.pathIcon?.stroke[1]} 
-                                                stroke-opacity={pathname?.includes(item?.path) ? item?.pathIcon?.stroke_opacity[0] : item?.pathIcon?.stroke_opacity[1]} stroke-width={item?.pathIcon?.stroke_width} stroke-linecap={item?.pathIcon?.stroke_linecap} stroke-linejoin={item?.pathIcon?.stroke_linejoin}
+                                                strokeOpacity={pathname?.includes(item?.path) ? item?.pathIcon?.stroke_opacity[0] : item?.pathIcon?.stroke_opacity[1]} strokeWidth={item?.pathIcon?.stroke_width} strokeLinecap={item?.pathIcon?.stroke_linecap} strokeLinejoin={item?.pathIcon?.stroke_linejoin}
                                                 />
                                             </svg>
                                             }

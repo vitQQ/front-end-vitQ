@@ -26,3 +26,7 @@
 .nav-icon svg:hover path{
     fill: #71A7F2;
 }
+
+.reg-log {
+    margin-top : -10%;
+}

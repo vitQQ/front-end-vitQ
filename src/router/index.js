@@ -1,4 +1,4 @@
-import { Routes, Route} from "react-router-dom";
+import { Routes, Route, Navigate} from "react-router-dom";
 import Home from "../pages/Home/Home";
 import NotFound from "../pages/NotFound";
 import LandingPage from "../pages/LandingPage/LandingPage"
@@ -18,11 +18,13 @@ export default function AppRoutes() {
       {/* <Route exact path="kalkulasi" element={<Kalkulasi />} /> */}
       <Route exact path="/kalkulasi" element={<MenuKalkululasi />} />
       <Route exact path="kalkulasi/hasilkalkulasi" element={<HasilKalkulasi />} />
-      <Route exact path="akunku/:userid" element={<Akunku />} />
-      <Route exact path="akunku/:userid/editprofil" element={<Profile />} />
+      <Route exact path="akunku" element={<Akunku />} />
+      <Route exact path="akunku/editprofil" element={<Profile />} />
       <Route exact path="/masuk" element={<Login />} />
       <Route exact path="/daftar" element={<Daftar />} />
-      <Route exact path="*" element={<NotFound />} />
+      <Route exact path="/kalkulasi" element={<MenuKalkululasi />} />
+      <Route exact path="/not-found" element={<NotFound />} />
+      <Route exact path="*" element={<Navigate replace to="/not-found" />} />
     </Routes>
   );
 }

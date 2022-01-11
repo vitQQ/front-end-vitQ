@@ -61,7 +61,7 @@ export const loginUser = (user) => {
         `${process.env.REACT_APP_URL}/login`,
         user
       );
-      localStorage.setItem("token", data);
+      localStorage.setItem("token", data.result);
       dispatch({
         type: "POST_USER_SUCCESS",
       });
@@ -87,25 +87,19 @@ export const home = () => {
       };
       const endpoints = [
         `${process.env.REACT_APP_URL}/user`,
-        `${process.env.REACT_APP_URL}/history`,
+        `${process.env.REACT_APP_URL}/user-activity`,
       ];
 
       const getData = await axios.all(endpoints.map((e) => axios.get(e), config))
-      const data = await getData.spread(({data: user}, {data: history})=> {
-        return {user, history}
-      })
-
-      console.log(data)
-
-      // axios.all(endpoints.map((endpoint) => axios.get(endpoint))).then(
-      //   axios.spread(({data: user}, {data:repos}, {data:followers}, {data:following}) => {
-      //     console.log({ user, repos, followers, following });
-      //   })
-      // );
+      const data = getData.map((e) => e.data)
+      const user = data[0]
+      const history = data[1]
+      console.log(user)
 
       dispatch({
         type: "GET_USER_SUCCESS",
-        payload: data
+        payload: data,
+        payload2: history
       });
     } catch (error) {
       dispatch({

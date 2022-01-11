@@ -4,7 +4,7 @@ import male from "./male.svg"
 import back from "./back.svg"
 import "./profile.css"
 
-export default function Akunku() {
+export default function EditProfile() {
     return(
         <div className="container mt-5">
             <div id="back" className="mt-5 d-flex align-items-center">

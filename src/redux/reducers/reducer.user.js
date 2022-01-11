@@ -1,5 +1,6 @@
 const initialState = {
   user: [],
+  history: [],
   loading: false,
   error: null,
   token: localStorage.getItem("token") ? localStorage.getItem("token") : null
@@ -16,6 +17,7 @@ const userReducers = (state = initialState, action) => {
       return {
         ...state,
         user: action.payload,
+        history: action.payload2,
         loading: false,
       };
     case "GET_USER_FAIL":

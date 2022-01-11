@@ -1,0 +1,16 @@
+.input-hidden{
+    position: absolute;
+    left: -9999px;
+}
+
+.img-gender{
+    transform: scale(1.5);
+    box-shadow: 0 0 2px 2px #EEEEEE;
+    border-radius: 8%;
+}
+
+input[type=radio]:checked + center>label>img {
+    border: 1px solid #437FD3;
+    /* box-shadow: 0 0 2px 2px #437FD3; */
+    border-radius: 8%;
+}

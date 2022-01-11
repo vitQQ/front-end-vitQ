@@ -20,16 +20,16 @@ export default function MenuKalkalulasi() {
                 </div>
                 <Carousel show={2} className="carouselSection justify-content-between">
                 <div className="col-lg-4 col-xl-4 col-xxl-4 col-md-6 col-sm-6 col-12 p-lg-2 p-xl-2 p-xxl-2 p-1">
-                  <img className="w-100" src={ayam} />
+                  <img className="w-100" src={ayam} alt="ayam"/>
                 </div>
                 <div className="col-lg-4 col-xl-4 col-xxl-4 col-md-6 col-sm-6 col-12 p-lg-2 p-xl-2 p-xxl-2 p-1">
-                  <img className="w-100" src={ayam} />
+                  <img className="w-100" src={ayam} alt="ayam" />
                 </div>
                 <div className="col-lg-4 col-xl-4 col-xxl-4 col-md-6 col-sm-6 col-12 p-lg-2 p-xl-2 p-xxl-2 p-1">
-                  <img className="w-100" src={ayam} />
+                  <img className="w-100" src={ayam} alt="ayam" />
                 </div> 
                 <div className="col-lg-4 col-xl-4 col-xxl-4 col-md-6 col-sm-6 col-12 p-lg-2 p-xl-2 p-xxl-2 p-1">
-                  <img className="w-100" src={ayam} />
+                  <img className="w-100" src={ayam} alt="ayam" />
                 </div>    
                 </Carousel>
                 <Tabs
@@ -128,7 +128,7 @@ export default function MenuKalkalulasi() {
           </div>
         </div>
       </div>
-      <hr/>
+      <hr className="d-none d-md-block" />
     </div>
   );
 }

@@ -8,10 +8,10 @@ import { BsCircleFill  } from "react-icons/bs";
 
 export default function Akunku() {
     return(
-        <div className="mt-4 pt-5">
+        <div className="mt-3 pt-5">
             <Container>
                 {/* <img className="w-100" src={Background} alt="Background"></img> */}
-                <div className="background-profil d-flex justify-content-center align-items-center flex-column flex-lg-row pt-3 pt-lg-0">
+                <div className="background-profil d-flex justify-content-center align-items-center flex-column flex-lg-row pt-3 pt-md-4 pt-lg-0">
                     <Col className="d-flex justify-content-center">
                         <img className="profilpic" src={ProfilPic} alt="Profil"></img>
                     </Col>

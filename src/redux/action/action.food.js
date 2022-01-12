@@ -35,7 +35,7 @@ export const postFood = () => {
     try {
       const config = {
         headers: {
-          Authorization: "Bearer" + localStorage.getItem("token"),
+          Authorization: localStorage.getItem("token"),
         },
       };
       await axios.post(`${process.env.REACT_APP_URL}/makanan`, config);

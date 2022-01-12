@@ -8,7 +8,7 @@ export const getUser = () => {
     try {
       const config = {
         headers: {
-          Authorization: "Bearer" + localStorage.getItem("token"),
+          Authorization: localStorage.getItem("token"),
         },
       };
       const { data } = await axios.get(
@@ -82,7 +82,7 @@ export const home = () => {
     try {
       const config = {
         headers: {
-          Authorization: "Bearer" + localStorage.getItem("token"),
+          Authorization: localStorage.getItem("token"),
         },
       };
       const endpoints = [
@@ -90,7 +90,8 @@ export const home = () => {
         `${process.env.REACT_APP_URL}/user-makanan`,
       ];
 
-      const getData = await axios.all(endpoints.map((e) => axios.get(e), config))
+      const getData = await axios.all(endpoints.map((e) => axios.get(e, config)))
+      console.log(getData);
       const data = getData.map((e) => e.data)
       const user = data[0]
       const history = data[1]

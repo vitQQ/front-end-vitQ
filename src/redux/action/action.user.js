@@ -87,7 +87,7 @@ export const home = () => {
       };
       const endpoints = [
         `${process.env.REACT_APP_URL}/user`,
-        `${process.env.REACT_APP_URL}/user-activity`,
+        `${process.env.REACT_APP_URL}/user-makanan`,
       ];
 
       const getData = await axios.all(endpoints.map((e) => axios.get(e), config))

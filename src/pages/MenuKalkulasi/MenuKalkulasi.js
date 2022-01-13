@@ -1,15 +1,53 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ayam from "./asset/ayam.svg";
 import "./menuKalkulasi.css";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 import Cards from "../../components/card/Card";
+import Button from "../../components/button";
 import Carousel from "../../components/carousel/carousel";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import {getFood, postFood} from "../../redux/action/action.food"
 
 export default function MenuKalkalulasi() {
-  const foodReducers = useSelector((currentState)=>currentState.foodReducers)
-  console.log(foodReducers)
+  let navigate = useNavigate()
+  let food = useSelector((currentState)=>currentState.foodReducers.food)
+  let kalkulasi = useSelector((currentState)=>currentState.handleCalculateReducers)
+  const [makanan, setMakanan] = useState(food)
+  const dispatch = useDispatch()
+  // get all Food
+  useEffect(() => {
+    dispatch(getFood())
+    axios({
+      method: "get",
+      url : "http://localhost:3003/makanan",
+    })
+    .then(resp=>{
+      const foods = resp.data.result
+      setMakanan(foods)
+    })
+    .catch(e=>console.log(e))
+  }, [dispatch])
+
+  // handle to update
+  const handleClick =()=>{
+    axios({
+      method: "post",
+      url : "http://localhost:3003/user-makanan/61dfb21ec5e51914c11e4588",
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+    })
+    .then(resp=>{
+      const userMakanan = resp
+      userMakanan.data = kalkulasi
+      console.log(userMakanan)
+    })
+    .catch(e=>console.log(e))
+    navigate('/kalkulasi/hasilkalkulasi')
+  }
   return (
     <div className="rootbg mt-5">
       <div className="container my-5">
@@ -42,21 +80,22 @@ export default function MenuKalkalulasi() {
                 >
                   <Tab eventKey="All" title="All">
                     <div className="row bg-primary-1 p-3 d-flex g-3">
-                        {foodReducers?.food?.map(item => 
+                        {makanan?.map(item => 
                           <div className="col-lg-4 col-xl-4 col-xxl-4 col-md-6 col-sm-6 col-12">
                               <Cards 
                                   key={item?.id}
-                                  main={item?.main}
-                                  image={ayam}
-                                  title={item?.title}
+                                  id={item?._id}
+                                  main
+                                  image={item?.url_image}
+                                  title={item?.namaMakanan}
                                   categories={item?.categories}
-                                  cal={item?.cal}
-                                  emis={item?.emis}
                                   unit={item?.unit}
-                                  pro={item?.pro}
+                                  cal={item?.kalori}
+                                  emis={item?.emisi}
+                                  pro={item?.protein}
                                   jumlah={item?.jumlah}
                               />  
-                          </div> 
+                          </div>
                           )}
                     </div>
                   </Tab>
@@ -73,7 +112,11 @@ export default function MenuKalkalulasi() {
                     <p>5</p>
                   </Tab>
                 </Tabs>
-                <button type="button" className="mt-3 btn btn-light text-white bg-white-200 w-100 d-block d-lg-none d-xxl-none d-xl-none">Hitung</button>
+                <div className="sticky-button d-lg-none" onClick={handleClick}>
+                  {kalkulasi.length!==0?
+                  <Button value="Hitung"/> : <Button disabled value="Hitung"/>
+                }
+                </div>
               </div>
             </div>
           </div>
@@ -97,10 +140,20 @@ export default function MenuKalkalulasi() {
                 <div className="align-items-center">
                   <center>
                     <h3 className="fs-h3 fw-semibold">Hasil Kalkulasi</h3>
-                      <p className="my-5 py-5">Belum ada</p>
+                      {kalkulasi.length===0?
+                        <p className="my-5 py-5">Belum ada</p>
+                        :
+                        kalkulasi.map(item=>
+                          <p>{item?.title}</p>
+                        )
+                      }
                   </center>
                 </div>
-                <button type="button" className="btn btn-light text-white bg-white-200 w-100">Hitung</button>
+                <div onClick={handleClick}>
+                  {kalkulasi.length!==0?
+                  <Button value="Hitung"/> : <Button disabled value="Hitung"/>
+                  }
+                </div>
               </div>
             </div>
           </div>

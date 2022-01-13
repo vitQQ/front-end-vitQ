@@ -2,19 +2,25 @@ import React from "react";
 import { Card, Row, Col, Button } from "react-bootstrap";
 // import {getFood, postFood} from "../../redux/action/action.food"
 import {addFood, deleteFood} from "../../redux/action/action.calculate"
+import { useDispatch, useSelector } from "react-redux";
 
 // Pro props need to be fixed soon
 export default function Cards({ id, main, image, title, categories, cal, emis, unit, pro, jumlah }) {
-  const handleRemove = (id) => {
-    addFood(id)
+  const data = {id: id, image: image, title: title, categories: categories, cal: parseInt(cal), emis: parseInt(emis), unit: unit, pro: parseInt(pro), jumlah: parseInt(jumlah)}
+  const kalkulasi = useSelector((currentState)=>currentState.handleCalculateReducers)
+  const find_food = kalkulasi.find(e=> e.id===id)
+  const dispatch = useDispatch()
+  const handleAdd = () => {
+    dispatch(addFood(data))
   }
-  const handleAdd = (id) => {
-    deleteFood(id)
+  const handleRemove = () => {
+    dispatch(deleteFood(data))
   }
+
   return (
     <>
       {main ? (
-        <Card className="border-white-100">
+        <Card className="border-white-100" key={id}>
           <div className="pt-3 ps-3 pe-3">
             <Card.Img
               style= {{ height: 160, objectFit: "cover" }}
@@ -48,7 +54,7 @@ export default function Cards({ id, main, image, title, categories, cal, emis, u
               <Col xs={7} className="p-0">
                 <Row className="bg-white-100 p-1 rounded m-0">
                   <Col xs={4} className="fw-bold fs-subtitle p-0">
-                    <Button variant="white-0 p-1 text-primary-3 fw-semibold" onClick={handleRemove({ id, main, image, title, categories, cal, emis, unit, pro, jumlah })}>
+                    <Button variant="white-0 p-1 text-primary-3 fw-semibold" onClick={handleRemove}>
                       -
                     </Button>
                   </Col>
@@ -56,10 +62,10 @@ export default function Cards({ id, main, image, title, categories, cal, emis, u
                     xs={4}
                     className="fw-bold fs-subtitle text-center m-auto"
                   >
-                   {jumlah}
+                   {find_food? find_food.jumlah : 0}
                   </Col>
                   <Col xs={4} className="fw-bold fs-subtitle p-0">
-                    <Button variant="white-0 p-1 text-primary-3 fw-semibold float-end" onClick={handleAdd({ id, main, image, title, categories, cal, emis, unit, pro, jumlah })}>
+                    <Button variant="white-0 p-1 text-primary-3 fw-semibold float-end" onClick={handleAdd}>
                       +
                     </Button>
                   </Col>
@@ -69,7 +75,7 @@ export default function Cards({ id, main, image, title, categories, cal, emis, u
           </Card.Body>
         </Card>
       ) : (
-        <Card className="border-white-100">
+        <Card className="border-white-100" key={id}>
           <Row>
             <Col xs={{ order: "last" }}>
               <div className="p-3">
@@ -113,7 +119,7 @@ export default function Cards({ id, main, image, title, categories, cal, emis, u
                   <Col xs={7} className="p-0">
                     <Row className="bg-white-100 p-1 rounded m-0">
                       <Col xs={4} className="fw-bold fs-subtitle p-0">
-                        <Button variant="white-0 p-1 text-primary-3 fw-semibold" onClick={handleRemove({ id, main, image, title, categories, cal, emis, unit, pro, jumlah })}>
+                        <Button variant="white-0 p-1 text-primary-3 fw-semibold" onClick={handleRemove}>
                           -
                         </Button>
                       </Col>
@@ -124,7 +130,7 @@ export default function Cards({ id, main, image, title, categories, cal, emis, u
                         {jumlah}
                       </Col>
                       <Col xs={4} className="fw-bold fs-subtitle p-0">
-                        <Button variant="white-0 p-1 text-primary-3 fw-semibold float-end" onClick={handleAdd({ id, main, image, title, categories, cal, emis, unit, pro, jumlah })}>
+                        <Button variant="white-0 p-1 text-primary-3 fw-semibold float-end" onClick={handleAdd}>
                           +
                         </Button>
                       </Col>

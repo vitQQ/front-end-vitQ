@@ -12,7 +12,7 @@ export const getFood = () => {
         },
       };
       const {data} = await axios.get(
-        `${process.env.REACT_APP_URL}/makanan`, config
+        `${process.env.REACT_APP_URL}/user-makanan`, config
       );
       dispatch({
         type: "GET_FOOD_SUCCESS",
@@ -38,7 +38,7 @@ export const postFood = () => {
           Authorization: localStorage.getItem("token"),
         },
       };
-      await axios.post(`${process.env.REACT_APP_URL}/makanan`, config);
+      await axios.post(`${process.env.REACT_APP_URL}/user-makanan`, config);
       dispatch({
         type: "POST_FOOD_SUCCESS",
       });

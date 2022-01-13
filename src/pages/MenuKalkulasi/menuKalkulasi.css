@@ -1,0 +1,20 @@
+.button-hitung{
+    outline: 0 !important;
+}
+
+.button-hitung:hover{
+    box-shadow: 5px 10px #888888;
+}
+
+
+@media only screen and (max-width: 970px) {
+    .rootbg {
+      background-color:ffff;
+    }
+  }
+
+  @media only screen and (min-width: 971px) {
+    .rootbg {
+      background-color: #F5F9FF
+    }
+  }

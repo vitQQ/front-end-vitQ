@@ -34,22 +34,12 @@ export default function Akunku() {
         </div>
         <Row className="m-3 pt-4">
           <Col className="shadow rounded-3">
-            <div className="p-3 bg-light d-flex justify-content-between">
-              <NavLink to="/akunku/editprofil" className="text-decoration-none text-inactive">
-                <div className="p-3 bg-light d-flex justify-content-between">
-                  <h6>Atur Profil</h6>
-                  <IoIosArrowForward />
-                </div>
-              </NavLink>
-              <IoIosArrowForward />
-            </div>
-            <div className="p-3 bg-light d-flex justify-content-between">
-              <div className="d-flex justify-content-start">
-                <h6>Aktivitasku</h6>
-                <BsCircleFill className="pt-1" color="#E82D3D" size={12} />
+            <NavLink to="/akunku/editprofil" className="text-decoration-none text-inactive">
+              <div className="p-3 bg-light d-flex justify-content-between">
+                <h6>Atur Profil</h6>
+                <IoIosArrowForward />
               </div>
-              <IoIosArrowForward />
-            </div>
+            </NavLink>
             <div className="p-3 bg-light d-flex justify-content-between">
               <h6>Bantuan</h6>
               <IoIosArrowForward />

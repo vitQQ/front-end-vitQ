@@ -3,6 +3,7 @@ const initialState = {
   history: [],
   loading: false,
   error: null,
+  historyToday: [],
   token: localStorage.getItem("token") ? localStorage.getItem("token") : null
 };
 
@@ -11,19 +12,25 @@ const userReducers = (state = initialState, action) => {
     case "GET_USER_REQUEST":
       return {
         ...state,
-        loading: true,
+        loading: action.loading,
       };
     case "GET_USER_SUCCESS":
       return {
         ...state,
         user: action.payload,
         history: action.payload2,
-        loading: false,
+        loading: action.loading,
       };
+    case "GET_USER_SUCCESS2":
+      return {
+        ...state,
+        historyToday: action.payload3,
+        loading: action.loading,
+      }
     case "GET_USER_FAIL":
       return {
         ...state,
-        loading: false,
+        loading: action.loading,
         error: action.error,
       };
     case "POST_USER_REQUEST":

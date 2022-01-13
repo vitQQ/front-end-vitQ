@@ -9,7 +9,7 @@ export default function ExitModal() {
   function logout() {
     console.log("logout");
     localStorage.removeItem("token");
-    window.location.href = "/home";
+    window.location.href = "/";
   }
   return (
     <>

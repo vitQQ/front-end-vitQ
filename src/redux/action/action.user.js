@@ -78,6 +78,7 @@ export const home = () => {
   return async (dispatch) => {
     dispatch({
       type: "GET_USER_REQUEST",
+      loading: true
     });
     try {
       const config = {
@@ -90,17 +91,33 @@ export const home = () => {
         `${process.env.REACT_APP_URL}/user-makanan`,
       ];
 
-      const getData = await axios.all(endpoints.map((e) => axios.get(e, config)))
-      console.log(getData);
-      const data = getData.map((e) => e.data)
-      const user = data[0]
-      const history = data[1]
-      console.log(user)
+      const getData = await axios.all(
+        endpoints.map((e) => axios.get(e, config))
+      );
+      const data = getData.map((e) => e.data);
+      const user = data[0];
+      const history = data[1];
+      const currentDay = Date().split(" ").slice(0, 3).join(" ");
+      console.log(currentDay)
 
-      dispatch({
+      await dispatch({
         type: "GET_USER_SUCCESS",
-        payload: data,
-        payload2: history
+        loading: true,
+        payload: user,
+        payload2: history,
+      });
+
+      const bla = await history.data.filter((item) => {
+          // const change = item.date_time.split(" ").slice(0, 3).join(" ");
+          return currentDay === item.date_time.split(" ").slice(0, 3).join(" ")
+        })
+
+      console.log(bla)
+        
+      await dispatch({
+        type: "GET_USER_SUCCESS2",
+        loading: false,
+        payload3: bla
       });
     } catch (error) {
       dispatch({

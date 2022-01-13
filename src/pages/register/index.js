@@ -43,7 +43,7 @@ export  default function Daftar(){
                 }
                 if(result.data.message==='success'){
                     localStorage.setItem("result",JSON.stringify(res))
-                    navigate("/home");
+                    navigate("/akunku/editprofil");
                 }
                 return result;
             } else{
@@ -106,7 +106,8 @@ export  default function Daftar(){
                          </Link>
                     </p>
                     <div className="col-12 my-5">
-                        <center><GoogleLogin
+                        <center>
+                            <GoogleLogin
                                 clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
                                 buttonText="Masuk dengan Google"
                                 onSuccess={responseGoogle}

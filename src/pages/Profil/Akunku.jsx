@@ -7,6 +7,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import { BsCircleFill } from "react-icons/bs";
 import { home } from "../../redux/action/action.user";
 import { useSelector, useDispatch } from "react-redux";
+import { NavLink } from "react-router-dom";
 import ExitModal from "../../components/modal/ExitModal";
 
 export default function Akunku() {
@@ -34,7 +35,12 @@ export default function Akunku() {
         <Row className="m-3 pt-4">
           <Col className="shadow rounded-3">
             <div className="p-3 bg-light d-flex justify-content-between">
-              <h6>Atur Profil</h6>
+              <NavLink to="/akunku/editprofil" className="text-decoration-none text-inactive">
+                <div className="p-3 bg-light d-flex justify-content-between">
+                  <h6>Atur Profil</h6>
+                  <IoIosArrowForward />
+                </div>
+              </NavLink>
               <IoIosArrowForward />
             </div>
             <div className="p-3 bg-light d-flex justify-content-between">

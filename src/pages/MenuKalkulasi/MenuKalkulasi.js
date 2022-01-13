@@ -5,8 +5,11 @@ import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 import Cards from "../../components/card/Card";
 import Carousel from "../../components/carousel/carousel";
+import { useSelector } from "react-redux";
 
 export default function MenuKalkalulasi() {
+  const foodReducers = useSelector((currentState)=>currentState.foodReducers)
+  console.log(foodReducers)
   return (
     <div className="rootbg mt-5">
       <div className="container my-5">
@@ -39,47 +42,22 @@ export default function MenuKalkalulasi() {
                 >
                   <Tab eventKey="All" title="All">
                     <div className="row bg-primary-1 p-3 d-flex g-3">
-                        <div className="col-lg-4 col-xl-4 col-xxl-4 col-md-6 col-sm-6 col-12">
-                            <Cards 
-                                main="abc"
-                                image={ayam}
-                                title="ayam"
-                                categories="ayam"
-                                cal="120"
-                                emis="120"
-                                unit="1"
-                                pro="120"
-                                jumlah="1"
-                            />
-                                
-                        </div>
-                        <div className="col-lg-4 col-xl-4 col-xxl-4 col-md-6 col-sm-6 col-12">
-                            <Cards 
-                                main="abc"
-                                image={ayam}
-                                title="ayam"
-                                categories="ayam"
-                                cal="120"
-                                emis="120"
-                                unit="1"
-                                pro="120"
-                                jumlah="1"
-                            />
-                                
-                        </div>
-                        <div className="col-lg-4 col-xl-4 col-xxl-4 col-md-6 col-sm-6 col-12">
-                            <Cards 
-                                main="abc"
-                                image={ayam}
-                                title="ayam"
-                                categories="ayam"
-                                cal="120"
-                                emis="120"
-                                unit="1"
-                                pro="120"
-                                jumlah="1"
-                            />       
-                        </div>
+                        {foodReducers?.food?.map(item => 
+                          <div className="col-lg-4 col-xl-4 col-xxl-4 col-md-6 col-sm-6 col-12">
+                              <Cards 
+                                  key={item?.id}
+                                  main={item?.main}
+                                  image={ayam}
+                                  title={item?.title}
+                                  categories={item?.categories}
+                                  cal={item?.cal}
+                                  emis={item?.emis}
+                                  unit={item?.unit}
+                                  pro={item?.pro}
+                                  jumlah={item?.jumlah}
+                              />  
+                          </div> 
+                          )}
                     </div>
                   </Tab>
                   <Tab eventKey="Karbohidrat" title="Karbohidrat">

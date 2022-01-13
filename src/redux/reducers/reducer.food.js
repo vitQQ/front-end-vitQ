@@ -1,5 +1,7 @@
+import {Makanan} from "../../helpers/dummydata"
+
 const initialState = {
-    food: [],
+    food: [...Makanan],
     loading: false,
     error: null,
   };

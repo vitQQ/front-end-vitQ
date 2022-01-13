@@ -6,6 +6,8 @@ import { IoHelpCircleOutline } from "react-icons/io5";
 import Button from "../../components/button";
 import { Link, useLocation } from "react-router-dom";
 import useWindowDimensions from "../../helpers/WindowDimension"
+import {Makanan} from "../../helpers/dummydata"
+import ayam from "../MenuKalkulasi/asset/ayam.svg";
 
 
 export default function HasilKalkulasi(){
@@ -35,17 +37,23 @@ export default function HasilKalkulasi(){
                 </div>
                 <div className="d-flex justify-content-between flex-column flex-lg-row">
                     <Col className="px-3 px-md-0">
-                        <Row className="my-3">
-                            <FoodCard/>
-                        </Row>
-                        <Row className="my-3">
-                            <FoodCard/>
-                        </Row>
-                        <Row className="my-3">
-                            <FoodCard/>
-                        </Row>
+                        {Makanan.map(item => 
+                            <Row className="my-3">
+                                <FoodCard
+                                    key={item?.id}
+                                    image={ayam}
+                                    title={item?.title}
+                                    categories={item?.categories}
+                                    cal={item?.cal}
+                                    emis={item?.emis}
+                                    unit={item?.unit}
+                                    pro={item?.pro}
+                                    jumlah={item?.jumlah}
+                                    />
+                            </Row>
+                        )}
                     </Col>
-                    <div className="d-none d-md-flex col-1"></div>
+                    <div className="d-none d-md-flex col-3"></div>
                     <Col>
                         <div className="mt-2 mt-lg-0 w-100 ">
                             <div className="p-3 border rounded">

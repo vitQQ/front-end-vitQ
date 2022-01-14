@@ -9,6 +9,7 @@ import pilihMakananPic from "./assets/pilihMakanan.svg"
 import logoKemenkesPic from "./assets/logoKemenkes.png"
 import logoGermasPic from "./assets/logoGermas.png"
 import Button from "./../../components/button";
+import { Link } from "react-router-dom";
 
 export default function LandingPage(){
     return(
@@ -21,7 +22,7 @@ export default function LandingPage(){
                         <p className="fs-body my-xxl-5 my-xl-5 my-lg-5 my-md-3 my-5">Ayo, Hitung kalorimu, sekaligus menghitung besaran emisimu pada dunia dan selamatkan mereka</p>
                         <div className="d-flex justify-content-center justify-content-lg-start">
                             <div className="w-25">
-                                <Button value="Mulai"></Button>
+                                <Link to="/masuk"><Button value="Mulai"></Button></Link>
                             </div>
                         </div>
                     </div>

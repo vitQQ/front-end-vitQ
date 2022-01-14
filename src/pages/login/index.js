@@ -7,12 +7,13 @@ import axios from "axios";
 import GoogleLogin from "react-google-login";
 
 export  default function Login(){
+    const [passwordShown, setPasswordShown] = useState(false);
     const {register, handleSubmit, formState: {errors}} = useForm();
     const [cekInput, setcekInput] = useState(false);
     const navigate = useNavigate();
     const onSubmit = data => {
         console.log(data);
-        axios.post("http://localhost:5000/login",
+        axios.post(`${process.env.REACT_APP_URL}/login`,
                     data,
                     { headers: { 'Content-Type': 'application/json' }}
                    )
@@ -31,7 +32,7 @@ export  default function Login(){
         try{
             if(authResult){
                 console.log(authResult);
-                const result = await axios.post("http://localhost:5000/auth/google",
+                const result = await axios.post(`${process.env.REACT_APP_URL}/auth/google`,
                                                  authResult,
                                                  { headers: { 'Content-Type': 'application/json' }})
                 console.log(result)
@@ -53,6 +54,12 @@ export  default function Login(){
             console.log(e)
         }
     }
+
+    const togglePassword = () => {
+        // When the handler is invoked
+        // inverse the boolean state of passwordShown
+        setPasswordShown(!passwordShown);
+    };
    
     return(
         <div className="container px-0 py-3">
@@ -72,10 +79,14 @@ export  default function Login(){
                     </div>
                     <div className="col-12 mb-4">
                         <label htmlFor="validationServer01" className="form-label fs-h3 text-active fw-semibold">Password</label>
-                        <input  type="text" 
+                        <input  type={passwordShown ? "text" : "password"}
                                 className="form-control" 
                                 {...register("password")}
                                 required />
+                        <div className="d-flex mt-2 mb-4">
+                            <input className="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" onClick={() => togglePassword()} />
+                            <label htmlFor="inlineCheckbox1" className="ms-2"> Tampilkan Password</label>
+                        </div>
                         <p className="my-2 fs-subtitle" style={{color:"#485860"}}>Lupa Password? 
                             <Link to={`/`}><span className="text-primary-3"> klik di sini</span></Link>
                         </p>

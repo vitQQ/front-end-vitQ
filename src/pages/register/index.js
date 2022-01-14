@@ -7,11 +7,12 @@ import axios from "axios";
 import GoogleLogin from "react-google-login";
 
 export  default function Daftar(){
+    const [passwordShown, setPasswordShown] = useState(false);
     const {register, handleSubmit, formState: {errors}} = useForm();
     const [emailExist, setemailExist] = useState(false);
     const navigate = useNavigate();
     const onSubmit = data => {
-        axios.post("http://localhost:5000/register", 
+        axios.post(`${process.env.REACT_APP_URL}/register`, 
                     data,
                     { headers: { 'Content-Type': 'application/json' }}
                    )
@@ -31,7 +32,7 @@ export  default function Daftar(){
         try{
             if(authResult){
                 console.log(authResult);
-                const result = await axios.post("http://localhost:5000/auth/google",
+                const result = await axios.post(`${process.env.REACT_APP_URL}/auth/google`,
                                                  authResult,
                                                  { headers: { 'Content-Type': 'application/json' }})
                 console.log(result)
@@ -53,7 +54,11 @@ export  default function Daftar(){
             console.log(e)
         }
     }
-
+    const togglePassword = () => {
+        // When the handler is invoked
+        // inverse the boolean state of passwordShown
+        setPasswordShown(!passwordShown);
+    };
     return(
         <div className="container px-0 py-3">
             <div className="row my-5 py-5">
@@ -83,7 +88,7 @@ export  default function Daftar(){
                     </div>
                     <div className="col-12 mb-4">
                         <label htmlFor="validationServer01" className="form-label fs-h3 text-active fw-semibold">Password</label>
-                        <input type="text" 
+                        <input type={passwordShown ? "text" : "password"}
                                className="form-control" 
                                name="password"
                                {...register("password",{
@@ -93,6 +98,10 @@ export  default function Daftar(){
                                })}
                                required />
                                  {errors.password && <p className="text-secondary-3 mt-2">*password minimal 8 karakter dengan kombinasi huruf dan angka.</p>}
+                        <div className="d-flex mt-2 mb-4">
+                            <input className="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" onClick={() => togglePassword()} />
+                            <label htmlFor="inlineCheckbox1" className="ms-2"> Tampilkan Password</label>
+                        </div>
                         <p className="my-2 text-disable fs-subtitle">Dengan mendaftar, saya menyetujui  <Link to={`/`}><span className="text-primary-3"> syarat dan ketentuan </span></Link>
                             syarat dan <Link to={`/`}><span className="text-primary-3"> ketentuan serta kebijakan privasi.</span></Link>
                         </p>

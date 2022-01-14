@@ -12,7 +12,7 @@ export default function HasilKalkulasi(){
     let {width} = useWindowDimensions()
     let kalkulasi = useSelector((currentState)=>currentState.handleCalculateReducers)
     let jumlah_kalori = kalkulasi.reduce((a,b)=>a+parseInt(b.cal*b.jumlah), 0)
-    let jumlah_emisi = kalkulasi.reduce((a,b)=>a+parseFloat(b.emis*b.jumlah), 0)
+    let jumlah_emisi = kalkulasi.reduce((a,b)=>a+(b.emis*b.jumlah), 0)
     return(
         <div className={width>750? "m-4 p-5" : "m-3 px-3"}>
             <div className={width>750?"mt-3 pt-4 px-4" : "mx-3 pt-1"}>

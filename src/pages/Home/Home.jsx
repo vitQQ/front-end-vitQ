@@ -6,11 +6,12 @@ import TREE from "../../components/tree";
 import FOOD from "../../components/foodTime";
 import "./assets/home.css";
 import gambar from "./assets/aktivitas.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { home } from "../../redux/action/action.user";
 
 export default function Home() {
+  const navigate = useNavigate();
   const time = new Date().getHours();
   const data = useSelector((state) => state.userReducers);
   const dispatch = useDispatch();
@@ -21,13 +22,21 @@ export default function Home() {
 
   const emisi = historyToday.reduce((a, b) => a + b.jumlah_emisi, 0);
   const kalori = historyToday.reduce((a, b) => a + b.jumlah_kalori, 0);
-  const jumlahKalori = user.length !== 0 ? user.result.jumlahKalori : 0;
+  const jumlahKalori = user.length !== 0 ? user.result.kaloriHarian.toFixed() : 0;
 
   const hasil = (kalori / jumlahKalori) * 100
 
   useEffect(() => {
     dispatch(home());
   }, [dispatch]);
+
+  useEffect(() => {
+    const exist = localStorage.getItem("token");
+    console.log(exist);
+    if (!exist) {
+      return navigate("/masuk");
+    }
+  }, [navigate]);
 
   return (
     <Container fluid className="px-0">

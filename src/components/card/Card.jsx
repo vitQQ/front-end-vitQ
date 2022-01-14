@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 // Pro props need to be fixed soon
 export default function Cards({ id, main, image, title, categories, cal, emis, unit, pro, jumlah }) {
-  const data = {id: id, image: image, title: title, categories: categories, cal: parseInt(cal), emis: parseInt(emis), unit: unit, pro: parseInt(pro), jumlah: parseInt(jumlah)}
+  const data = {id: id, image: toString(image), title: title, categories: categories, cal: parseInt(cal), emis: parseFloat(emis).toFixed(2), unit: unit, pro: parseInt(pro), jumlah: parseInt(jumlah)}
   const kalkulasi = useSelector((currentState)=>currentState.handleCalculateReducers)
   const find_food = kalkulasi.find(e=> e.id===id)
   const dispatch = useDispatch()

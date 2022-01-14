@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 // import Background from  "./assets/background@2x-100.jpg"
-import ProfilPic from "./assets/Asset 3@2x-100.jpg";
+import ProfilPicL from "./assets/Asset 3@2x-100.jpg";
+import ProfilPicP from "./assets/Asset 3@1x-100.jpg";
 import "./Akunku.css";
 import { IoIosArrowForward } from "react-icons/io";
-import { BsCircleFill } from "react-icons/bs";
 import { home } from "../../redux/action/action.user";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
@@ -25,7 +25,7 @@ export default function Akunku() {
         {/* <img className="w-100" src={Background} alt="Background"></img> */}
         <div className="background-profil d-flex justify-content-center align-items-center flex-column flex-lg-row pt-3 pt-md-4 pt-lg-0">
           <Col className="d-flex justify-content-center align-items-center col-lg-6">
-            <img className="profilpic" src={ProfilPic} alt="Profil"></img>
+            <img className="profilpic" src={user.message === "SUCCESS" ? (user.result.jenisKelamin === "P" ? ProfilPicP : ProfilPicL) : ""} alt="Profil"></img>
           </Col>
           <Col className="text-primary-1 text-center text-lg-start">
             <h1>{user.message === "SUCCESS" ? user.result.nama : ""}</h1>

@@ -123,13 +123,13 @@ export default function Home() {
                           <div className="fs-body fw-semibold text-center mb-3">
                             Kalorimu per hari
                           </div>
-                          <div class="single-chart m-auto mb-3">
+                          <div className="single-chart m-auto mb-3">
                             <svg
                               viewBox="0 0 36 36"
-                              class="circular-chart green"
+                              className="circular-chart green"
                             >
                               <path
-                                class="circle-bg"
+                                className="circle-bg"
                                 d="M18 2.0845
           a 15.9155 15.9155 0 0 1 0 31.831
           a 15.9155 15.9155 0 0 1 0 -31.831"
@@ -161,10 +161,10 @@ export default function Home() {
                           <div className="fs-body fw-semibold text-center mb-3">
                             Emisimu per hari
                           </div>
-                          <div class="single-chart m-auto mb-3">
-                            <svg viewBox="0 0 36 36" class="circular-chart red">
+                          <div className="single-chart m-auto mb-3">
+                            <svg viewBox="0 0 36 36" className="circular-chart red">
                               <path
-                                class="circle-bg"
+                                className="circle-bg"
                                 d="M18 2.0845
           a 15.9155 15.9155 0 0 1 0 31.831
           a 15.9155 15.9155 0 0 1 0 -31.831"

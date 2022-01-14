@@ -1,12 +1,51 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ayam from "./asset/ayam.svg";
 import "./menuKalkulasi.css";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 import Cards from "../../components/card/Card";
+import Button from "../../components/button";
 import Carousel from "../../components/carousel/carousel";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import {getFood} from "../../redux/action/action.food"
+import axios from "axios";
 
 export default function MenuKalkalulasi() {
+  let navigate = useNavigate()
+  let food = useSelector((currentState)=>currentState.foodReducers.food)
+  let kalkulasi = useSelector((currentState)=>currentState.handleCalculateReducers)
+  const dispatch = useDispatch()
+
+  // get all Food
+  useEffect(() => {
+    dispatch(getFood())
+  }, [dispatch])
+
+  // handle to update
+  const handleClick =()=>{
+    axios
+      .post(`${process.env.REACT_APP_URL}/user-makanan`, kalkulasi, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: localStorage.getItem("token"),
+        },
+      })
+      .then((response) => {
+        const newData = response.data.data
+        const makanan_id = []
+        kalkulasi.forEach(e => {
+            makanan_id.push(e.id)
+        });
+        newData.id_makanan = makanan_id
+        console.log(response.data);
+        alert("Berhasil Memperbarui");
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+    navigate('/kalkulasi/hasilkalkulasi')
+  }
   return (
     <div className="rootbg mt-5">
       <div className="container my-5">
@@ -39,47 +78,23 @@ export default function MenuKalkalulasi() {
                 >
                   <Tab eventKey="All" title="All">
                     <div className="row bg-primary-1 p-3 d-flex g-3">
-                        <div className="col-lg-4 col-xl-4 col-xxl-4 col-md-6 col-sm-6 col-12">
-                            <Cards 
-                                main="abc"
-                                image={ayam}
-                                title="ayam"
-                                categories="ayam"
-                                cal="120"
-                                emis="120"
-                                unit="1"
-                                pro="120"
-                                jumlah="1"
-                            />
-                                
-                        </div>
-                        <div className="col-lg-4 col-xl-4 col-xxl-4 col-md-6 col-sm-6 col-12">
-                            <Cards 
-                                main="abc"
-                                image={ayam}
-                                title="ayam"
-                                categories="ayam"
-                                cal="120"
-                                emis="120"
-                                unit="1"
-                                pro="120"
-                                jumlah="1"
-                            />
-                                
-                        </div>
-                        <div className="col-lg-4 col-xl-4 col-xxl-4 col-md-6 col-sm-6 col-12">
-                            <Cards 
-                                main="abc"
-                                image={ayam}
-                                title="ayam"
-                                categories="ayam"
-                                cal="120"
-                                emis="120"
-                                unit="1"
-                                pro="120"
-                                jumlah="1"
-                            />       
-                        </div>
+                        {food?.map(item => 
+                          <div className="col-lg-4 col-xl-4 col-xxl-4 col-md-6 col-sm-6 col-12">
+                              <Cards 
+                                  key={item?.id}
+                                  id={item?._id}
+                                  main
+                                  image={item?.url_image}
+                                  title={item?.namaMakanan}
+                                  categories={item?.categories}
+                                  unit={item?.unit}
+                                  cal={item?.kalori}
+                                  emis={item?.emisi}
+                                  pro={item?.protein}
+                                  jumlah={item?.jumlah}
+                              />  
+                          </div>
+                          )}
                     </div>
                   </Tab>
                   <Tab eventKey="Karbohidrat" title="Karbohidrat">
@@ -95,7 +110,11 @@ export default function MenuKalkalulasi() {
                     <p>5</p>
                   </Tab>
                 </Tabs>
-                <button type="button" className="mt-3 btn btn-light text-white bg-white-200 w-100 d-block d-lg-none d-xxl-none d-xl-none">Hitung</button>
+                <div className="sticky-button d-lg-none" onClick={handleClick}>
+                  {kalkulasi.length!==0?
+                  <Button value="Hitung"/> : <Button disabled value="Hitung"/>
+                }
+                </div>
               </div>
             </div>
           </div>
@@ -119,10 +138,20 @@ export default function MenuKalkalulasi() {
                 <div className="align-items-center">
                   <center>
                     <h3 className="fs-h3 fw-semibold">Hasil Kalkulasi</h3>
-                      <p className="my-5 py-5">Belum ada</p>
+                      {kalkulasi.length===0?
+                        <p className="my-5 py-5">Belum ada</p>
+                        :
+                        kalkulasi.map(item=>
+                          <p>{item?.title}</p>
+                        )
+                      }
                   </center>
                 </div>
-                <button type="button" className="btn btn-light text-white bg-white-200 w-100">Hitung</button>
+                <div onClick={handleClick}>
+                  {kalkulasi.length!==0?
+                  <Button value="Hitung"/> : <Button disabled value="Hitung"/>
+                  }
+                </div>
               </div>
             </div>
           </div>

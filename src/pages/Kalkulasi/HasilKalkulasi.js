@@ -4,16 +4,17 @@ import { IoIosArrowBack } from "react-icons/io";
 import { Col, Row } from "react-bootstrap";
 import { IoHelpCircleOutline } from "react-icons/io5";
 import Button from "../../components/button";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import useWindowDimensions from "../../helpers/WindowDimension"
-
+import { useSelector } from "react-redux";
 
 export default function HasilKalkulasi(){
     let {width} = useWindowDimensions()
-    let {pathname} = useLocation()
-    console.log(pathname)
+    let kalkulasi = useSelector((currentState)=>currentState.handleCalculateReducers)
+    let jumlah_kalori = kalkulasi.reduce((a,b)=>a+parseInt(b.cal*b.jumlah), 0)
+    let jumlah_emisi = kalkulasi.reduce((a,b)=>a+(b.emis*b.jumlah), 0)
     return(
-        <div className={width>750? "m-4 py-5" : "my-3 px-3"}>
+        <div className={width>750? "m-4 p-5" : "m-3 px-3"}>
             <div className={width>750?"mt-3 pt-4 px-4" : "mx-3 pt-1"}>
                 <Link to="/kalkulasi" className="text-decoration-none">
                     <div className="text-primary d-flex justify-content-start align-content-center mb-2 border-1">
@@ -31,31 +32,36 @@ export default function HasilKalkulasi(){
                 <div className="px-3 pt-3 px-md-0">
                     <h5 className="h-3">Kalkulasi makananmu</h5>
                     <p className="fs-subtitle">Hasil Emisi dan Kalori dari makanan yang kamu pilih</p>
-
                 </div>
                 <div className="d-flex justify-content-between flex-column flex-lg-row">
                     <Col className="px-3 px-md-0">
-                        <Row className="my-3">
-                            <FoodCard/>
-                        </Row>
-                        <Row className="my-3">
-                            <FoodCard/>
-                        </Row>
-                        <Row className="my-3">
-                            <FoodCard/>
-                        </Row>
+                        {kalkulasi.map(item => 
+                            <Row className="my-3">
+                                <FoodCard
+                                    id={item?.id}
+                                    image={item.url_image}
+                                    title={item?.title}
+                                    categories={item?.categories}
+                                    cal={parseInt(item?.cal)*parseInt(item?.jumlah)}
+                                    emis={parseFloat(item?.emis)*parseInt(item?.jumlah)}
+                                    unit={item?.unit}
+                                    pro={parseInt(item?.pro)**parseInt(item?.jumlah)}
+                                    jumlah={item?.jumlah}
+                                    />
+                            </Row>
+                        )}
                     </Col>
-                    <div className="d-none d-md-flex col-1"></div>
+                    <div className="d-none d-md-flex col-3"></div>
                     <Col>
                         <div className="mt-2 mt-lg-0 w-100 ">
                             <div className="p-3 border rounded">
                                 <div className="d-flex justify-content-between fs-subtitle">
                                     <p>Jumlah Kalori :</p>
-                                    <p>600 kkal</p>
+                                    <p>{jumlah_kalori} kkal</p>
                                 </div>
                                 <div className="d-flex justify-content-between fs-subtitle">
                                     <p>Jumlah Emisi Karbon :</p>
-                                    <p>1 KgCo2e</p>
+                                    <p>{jumlah_emisi} KgCo2e</p>
                                 </div>
                                 <div className="d-flex justify-content-between fs-body">
                                     <h6>Total Points :</h6>

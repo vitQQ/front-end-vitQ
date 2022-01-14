@@ -6,6 +6,11 @@
     box-shadow: 5px 10px #888888;
 }
 
+.sticky-button{
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 10%;
+}
 
 @media only screen and (max-width: 970px) {
     .rootbg {

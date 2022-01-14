@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import ayam from "./asset/ayam.svg";
 import "./menuKalkulasi.css";
 import Tabs from "react-bootstrap/Tabs";
@@ -8,44 +8,42 @@ import Button from "../../components/button";
 import Carousel from "../../components/carousel/carousel";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import {getFood} from "../../redux/action/action.food"
 import axios from "axios";
-import {getFood, postFood} from "../../redux/action/action.food"
 
 export default function MenuKalkalulasi() {
   let navigate = useNavigate()
   let food = useSelector((currentState)=>currentState.foodReducers.food)
   let kalkulasi = useSelector((currentState)=>currentState.handleCalculateReducers)
-  const [makanan, setMakanan] = useState(food)
   const dispatch = useDispatch()
+
   // get all Food
   useEffect(() => {
     dispatch(getFood())
-    axios({
-      method: "get",
-      url : "http://localhost:3003/makanan",
-    })
-    .then(resp=>{
-      const foods = resp.data.result
-      setMakanan(foods)
-    })
-    .catch(e=>console.log(e))
   }, [dispatch])
 
   // handle to update
   const handleClick =()=>{
-    axios({
-      method: "post",
-      url : "http://localhost:3003/user-makanan/61dfb21ec5e51914c11e4588",
-      headers: {
-        Authorization: localStorage.getItem("token"),
-      },
-    })
-    .then(resp=>{
-      const userMakanan = resp
-      userMakanan.data = kalkulasi
-      console.log(userMakanan)
-    })
-    .catch(e=>console.log(e))
+    axios
+      .post(`${process.env.REACT_APP_URL}/user-makanan`, kalkulasi, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: localStorage.getItem("token"),
+        },
+      })
+      .then((response) => {
+        const newData = response.data.data
+        const makanan_id = []
+        kalkulasi.forEach(e => {
+            makanan_id.push(e.id)
+        });
+        newData.id_makanan = makanan_id
+        console.log(response.data);
+        alert("Berhasil Memperbarui");
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
     navigate('/kalkulasi/hasilkalkulasi')
   }
   return (
@@ -80,7 +78,7 @@ export default function MenuKalkalulasi() {
                 >
                   <Tab eventKey="All" title="All">
                     <div className="row bg-primary-1 p-3 d-flex g-3">
-                        {makanan?.map(item => 
+                        {food?.map(item => 
                           <div className="col-lg-4 col-xl-4 col-xxl-4 col-md-6 col-sm-6 col-12">
                               <Cards 
                                   key={item?.id}

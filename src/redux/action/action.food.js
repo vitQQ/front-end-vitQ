@@ -12,7 +12,7 @@ export const getFood = () => {
         },
       };
       const {data} = await axios.get(
-        `${process.env.REACT_APP_URL}/user-makanan`, config
+        `${process.env.REACT_APP_URL}/makanan`, config
       );
       dispatch({
         type: "GET_FOOD_SUCCESS",

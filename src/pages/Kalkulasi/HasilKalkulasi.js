@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import FoodCard from '../../components/card/Card'
 import { IoIosArrowBack } from "react-icons/io";
 import { Col, Row } from "react-bootstrap";
@@ -7,27 +7,14 @@ import Button from "../../components/button";
 import { Link } from "react-router-dom";
 import useWindowDimensions from "../../helpers/WindowDimension"
 import { useSelector } from "react-redux";
-import axios from "axios";
 
 export default function HasilKalkulasi(){
     let {width} = useWindowDimensions()
     let kalkulasi = useSelector((currentState)=>currentState.handleCalculateReducers)
-    console.log(kalkulasi)
-    let jumlah_kalori = kalkulasi.reduce((a,b)=>a+parseInt(b.cal), 0)
-    let jumlah_emisi = kalkulasi.reduce((a,b)=>a+parseInt(b.emis), 0)
-    useEffect(() => {
-        axios({
-          method: "get",
-          url : "http://localhost:3003/user-makanan/61dfb21ec5e51914c11e4588",
-        })
-        .then(resp=>{
-          const foods = resp.data
-          console.log(foods)
-        })
-        .catch(e=>console.log(e))
-      }, [kalkulasi])
+    let jumlah_kalori = kalkulasi.reduce((a,b)=>a+parseInt(b.cal*b.jumlah), 0)
+    let jumlah_emisi = kalkulasi.reduce((a,b)=>a+parseFloat(b.emis*b.jumlah), 0)
     return(
-        <div className={width>750? "m-4 py-5" : "my-3 px-3"}>
+        <div className={width>750? "m-4 p-5" : "m-3 px-3"}>
             <div className={width>750?"mt-3 pt-4 px-4" : "mx-3 pt-1"}>
                 <Link to="/kalkulasi" className="text-decoration-none">
                     <div className="text-primary d-flex justify-content-start align-content-center mb-2 border-1">
@@ -55,10 +42,10 @@ export default function HasilKalkulasi(){
                                     image={item.url_image}
                                     title={item?.title}
                                     categories={item?.categories}
-                                    cal={item?.cal}
-                                    emis={item?.emis}
+                                    cal={parseInt(item?.cal)*parseInt(item?.jumlah)}
+                                    emis={parseFloat(item?.emis)*parseInt(item?.jumlah)}
                                     unit={item?.unit}
-                                    pro={item?.pro}
+                                    pro={parseInt(item?.pro)**parseInt(item?.jumlah)}
                                     jumlah={item?.jumlah}
                                     />
                             </Row>

@@ -22,7 +22,7 @@ export default function Home() {
 
   const emisi = historyToday.reduce((a, b) => a + b.jumlah_emisi, 0);
   const kalori = historyToday.reduce((a, b) => a + b.jumlah_kalori, 0);
-  const jumlahKalori = user.length !== 0 ? user.result.kaloriHarian.toFixed() : 0;
+  const jumlahKalori = user?.length !== 0 ? user?.result?.kaloriHarian : 0;
 
   const hasil = (kalori / jumlahKalori) * 100
 

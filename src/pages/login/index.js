@@ -8,7 +8,7 @@ import GoogleLogin from "react-google-login";
 
 export  default function Login(){
     const [passwordShown, setPasswordShown] = useState(false);
-    const {register, handleSubmit, formState: {errors}} = useForm();
+    const {register, handleSubmit} = useForm();
     const [cekInput, setcekInput] = useState(false);
     const navigate = useNavigate();
     const onSubmit = data => {

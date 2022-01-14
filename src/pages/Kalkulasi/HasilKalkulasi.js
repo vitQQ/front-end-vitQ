@@ -14,19 +14,22 @@ export default function HasilKalkulasi(){
     let {width} = useWindowDimensions()
     const navigate = useNavigate()
     let kalkulasi = useSelector((currentState)=>currentState.handleCalculateReducers)
-    let sum_kalori = kalkulasi.reduce((a,b)=>a+parseInt(b.cal*b.jumlah), 0)
-    let sum_emisi = kalkulasi.reduce((a,b)=>a+(b.emis*b.jumlah), 0)
+    let sum_kalori = kalkulasi.reduce((a,b)=>a+parseInt(b.cal*b.jumlah), 0).toFixed()
+    let sum_emisi = kalkulasi.reduce((a,b)=>a+(b.emis*b.jumlah), 0).toFixed(2)
     const makanan_id = kalkulasi.reduce((a,b)=> [...a,b.id],[])
+    console.log(sum_kalori)
     // kalkulasi.map(e=>console.log(e.id))
     const result = {
         id_makanan : makanan_id,
         jumlah_kalori : sum_kalori,
         jumlah_emisi : sum_emisi,
     } 
+
+    console.log(result)
     console.log(kalkulasi)
     const handleClick = () => {
         axios
-        .put(`${process.env.REACT_APP_URL}/user-makanan`, result, {
+        .post(`${process.env.REACT_APP_URL}/user-makanan`, result, {
           headers: {
             "Content-Type": "application/json",
             Authorization: localStorage.getItem("token"),
@@ -36,11 +39,12 @@ export default function HasilKalkulasi(){
           const newData = response.data.data
           console.log(newData);
           alert("Berhasil Memperbarui");
+          navigate('/home')
         })
         .catch((error) => {
           console.log(error.message);
         });
-        navigate('/home')
+       
     }
     return(
         <div className={width>750? "m-4 p-5" : "m-3 px-3"}>
@@ -85,18 +89,14 @@ export default function HasilKalkulasi(){
                     <Col>
                         <div className="mt-2 mt-lg-0 w-100 ">
                             <div className="p-3 border rounded">
-                                <div className="d-flex justify-content-between fs-subtitle">
+                                <div className="d-flex justify-content-between fs-subtitle fw-bold">
                                     <p>Jumlah Kalori :</p>
                                     <p>{sum_kalori} kkal</p>
                                 </div>
-                                <div className="d-flex justify-content-between fs-subtitle">
+                                <div className="d-flex justify-content-between fs-subtitle fw-bold">
                                     <p>Jumlah Emisi Karbon :</p>
                                     <p>{sum_emisi} KgCo2e</p>
                                 </div>
-                                <div className="d-flex justify-content-between fs-body">
-                                    <h6>Total Points :</h6>
-                                    <h6>1000 Points</h6>
-                                </div>   
                             </div>
                             <div className="p-2" onClick={handleClick}>
                                 <Button value="Selanjutnya"></Button>

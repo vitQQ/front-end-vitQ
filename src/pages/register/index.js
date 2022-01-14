@@ -38,12 +38,12 @@ export  default function Daftar(){
                 console.log(result)
                 console.log(authResult.accessToken)
                 console.log(result.data)
-                let res = {
-                    "token" : authResult.accessToken,
-                    "data" : result.data.result
-                }
+                // let res = {
+                //     "token" : authResult.accessToken,
+                //     "data" : result.data.result
+                // }
                 if(result.data.message==='success'){
-                    localStorage.setItem("result",JSON.stringify(res))
+                    localStorage.setItem("token",authResult.accessToken)
                     navigate("/akunku/editprofil");
                 }
                 return result;

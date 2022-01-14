@@ -35,15 +35,11 @@ export  default function Login(){
                 const result = await axios.post(`${process.env.REACT_APP_URL}/auth/google`,
                                                  authResult,
                                                  { headers: { 'Content-Type': 'application/json' }})
-                console.log(result)
-                console.log(authResult.accessToken)
-                console.log(result.data)
-                let res = {
-                    "token" : authResult.accessToken,
-                    "data" : result.data.result
-                }
+                // console.log(result)
+                // console.log(authResult.accessToken)
+                // console.log(result.data)
                 if(result.data.message==='success'){
-                    localStorage.setItem("result",JSON.stringify(res))
+                    localStorage.setItem("token",authResult.accessToken)
                     navigate("/home");
                 }
                 return result;

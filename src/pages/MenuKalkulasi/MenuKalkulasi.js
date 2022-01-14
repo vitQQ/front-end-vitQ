@@ -9,9 +9,10 @@ import Carousel from "../../components/carousel/carousel";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {getFood} from "../../redux/action/action.food"
-import axios from "axios";
+import useWindowDimensions from "../../helpers/WindowDimension"
 
 export default function MenuKalkalulasi() {
+  let {width} = useWindowDimensions()
   let navigate = useNavigate()
   let food = useSelector((currentState)=>currentState.foodReducers.food)
   let kalkulasi = useSelector((currentState)=>currentState.handleCalculateReducers)
@@ -24,31 +25,11 @@ export default function MenuKalkalulasi() {
 
   // handle to update
   const handleClick =()=>{
-    axios
-      .post(`${process.env.REACT_APP_URL}/user-makanan`, kalkulasi, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: localStorage.getItem("token"),
-        },
-      })
-      .then((response) => {
-        const newData = response.data.data
-        const makanan_id = []
-        kalkulasi.forEach(e => {
-            makanan_id.push(e.id)
-        });
-        newData.id_makanan = makanan_id
-        console.log(response.data);
-        alert("Berhasil Memperbarui");
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
     navigate('/kalkulasi/hasilkalkulasi')
   }
   return (
-    <div className="rootbg mt-5">
-      <div className="container my-5">
+    <div className={width>750? "rootbg mt-5" : ""}>
+      <div className={width>750? "container my-5" : "container"}>
         <div className="row my-lg-5 my-xl-5 my-xxl-5 my-0 p-0 g-5">
           <div className="col-lg-8 col-xl-8 col-xxl-8 col-12 order-lg-first order-last">
             <div className="makananFavorit">

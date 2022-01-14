@@ -1,0 +1,32 @@
+.nav-item {
+    color : "inactive"
+}
+
+.nav-item:hover {
+    color: #71A7F2
+}
+
+.navbar {
+    border:solid black 0.1;
+}
+
+/* .sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+}
+
+.sticky-bottom {
+    position: -webkit-sticky;
+    position: sticky;
+    bottom: 0;
+} */
+
+
+.nav-icon svg:hover path{
+    fill: #71A7F2;
+}
+
+.reg-log {
+    margin-top : -10%;
+}

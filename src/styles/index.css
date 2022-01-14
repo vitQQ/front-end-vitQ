@@ -1,0 +1,26 @@
+body {
+    margin: 0;
+    font-family: "Poppins", sans-serif !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+.textActive {
+    color: rgba(0, 0, 0, 0.87);
+}
+
+.textInActive {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.textDisable {
+    color: rgba(0, 0, 0, 0.38);
+}
+
+.fw-semibold {
+    font-weight: 500 !important;
+}
+
+.text-disabled {
+    color: rgba(0, 0, 0, 0.38) !important;
+}

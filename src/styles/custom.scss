@@ -1,0 +1,46 @@
+// $primary: #296DCD;
+// $secondary: #F9747F;
+
+// $theme-colors
+$theme-colors: (
+  "primary-1": #F5F9FF,
+  "primary-2": #71A7F2,
+  "primary-3": #296DCD,
+  "primary": #0F4187,
+
+  "secondary-1": #FFD9DC,
+  "secondary-2": #F9747F,
+  "secondary-3": #E82D3D,
+  "secondary": #C90B1B,
+  "secondary-4": #9C000D,
+
+  "active": rgba(0, 0, 0, 0.87),
+  "inactive": rgba(0, 0, 0, 0.60),
+  "disable": rgba(0, 0, 0, 0.38),
+
+  "white-0": #FFFF,
+  "white-100": #EEEEEE,
+  "white-200" : #BCBCBCBC
+);
+
+$custom-colors: (
+  "custom-color": #900
+);
+
+// Merge the maps
+$theme-colors: map-merge($theme-colors, $custom-colors);
+
+$body-color: rgba(0, 0, 0, 0.87);
+
+$font-sizes: (
+    "display": 48px,
+    "h1": 32px,
+    "h2": 24px,
+    "h3": 18px,
+    "body": 16px,
+    "subtitle": 14px,
+    "caption": 12px,
+);
+
+
+@import '~bootstrap/scss/bootstrap.scss';

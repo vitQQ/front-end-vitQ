@@ -18,7 +18,8 @@ export  default function Daftar(){
                    )
         .then(response => {
             console.log(response.data)
-            if(response.data==="Account Created"){
+            if(response.data.message==="Account Created"){
+                localStorage.setItem("token", response.data.accessToken)
                 navigate("/akunku/editprofil")
             }
         })

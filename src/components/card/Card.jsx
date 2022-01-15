@@ -36,22 +36,20 @@ export default function Cards({ id, main, image, title, categories, cal, emis, u
             <Card.Text className="text-active fs-caption mb-1">
               {categories}
             </Card.Text>
-            <Row className="m-0 gx-2">
-              <Col
-                xs={5}
-                className="badge bg-secondary-1 text-active fw-normal me-2"
+            <div className="m-0 gx-2">
+              <div
+                className="badge bg-primary-2 text-white fw-normal me-1"
               >
                 {cal} Kkal
-              </Col>
-              <Col
-                xs={5}
+              </div>
+              <div
                 className="badge bg-secondary-1 text-active fw-normal"
               >
                 {emis} CO2e
-              </Col>
-            </Row>
+              </div>
+            </div>
             <Row className="m-0 mt-3 gx-2">
-              <Col xs={7} className="p-0">
+              <Col xs={10} sm={7} className="p-0">
                 <Row className="bg-white-100 p-1 rounded m-0">
                   <Col xs={4} className="fw-bold fs-subtitle p-0">
                     <Button variant="white-0 p-1 text-primary-3 fw-semibold" onClick={handleRemove}>

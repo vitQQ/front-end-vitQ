@@ -58,9 +58,9 @@ export default function MenuKalkalulasi() {
                   className="fs-body"
                 >
                   <Tab eventKey="All" title="All">
-                    <div className="row bg-primary-1 p-3 d-flex g-3">
+                    <div className="row bg-primary-1 p-2 d-flex g-3">
                         {food?.map(item => 
-                          <div className="col-lg-4 col-xl-4 col-xxl-4 col-md-6 col-sm-6 col-12">
+                          <div className="px-2 col-lg-6 col-xl-4 col-xxl-4 col-md-6 col-sm-6 col-6">
                               <Cards 
                                   key={item?.id}
                                   id={item?._id}
@@ -69,7 +69,7 @@ export default function MenuKalkalulasi() {
                                   title={item?.namaMakanan}
                                   categories={item?.categories}
                                   unit={item?.unit}
-                                  cal={item?.kalori}
+                                  cal={item?.kalori.toFixed()}
                                   emis={item?.emisi}
                                   pro={item?.protein}
                                   jumlah={item?.jumlah}

@@ -23,7 +23,6 @@ export default function MenuKalkalulasi() {
     dispatch(getFood())
   }, [dispatch])
 
-  // handle to update
   const handleClick =()=>{
     navigate('/kalkulasi/hasilkalkulasi')
   }

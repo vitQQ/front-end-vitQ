@@ -4,6 +4,7 @@ import { BiMenu, BiX } from "react-icons/bi";
 import Button from "../button";
 import './sidebar.css';
 import { useLocation, useNavigate } from "react-router";
+import {Col} from "react-bootstrap"
 
 export default function Sidebar(){
     let {pathname} = useLocation()
@@ -19,19 +20,25 @@ export default function Sidebar(){
                     {sidebar? <BiX size={40}/> : <BiMenu size={40}/>}
                 </div>
                 <div className={!sidebar? 'menu' : 'menu active'}>
-                    <div className="side-menu">
+                    <div className="side-menu px-5">
                             <>
                                 <div className="p-2">
-                                    <a onClick={showSidebar} className='text-decoration-none text-active menu-item' href='#cara-kerja'>Cara Kerja?</a>
+                                    <a onClick={showSidebar} className='text-decoration-none text-active' href='#cara-kerja'>Cara Kerja?</a>
                                 </div>
                                 <div className="p-2">
-                                    <a className='text-decoration-none text-active menu-item' href='#apa-itu-vitq'>Apa itu VitQ?</a>
+                                    <a className='text-decoration-none text-active' href='#apa-itu-vitq'>Apa itu VitQ?</a>
                                 </div>
-                                <div onClick={()=> navigate("/masuk")} className="menu-item">
-                                    <Button nofill value={`Masuk`}/>
-                                </div>
-                                <div onClick={()=> navigate("/daftar")} className="menu-item">
-                                    <Button value={`Daftar`}/>
+                                <div className="d-flex justify-content-center">
+                                    <Col>
+                                        <div onClick={()=> navigate("/masuk")}>
+                                            <Button nofill value={`Masuk`}/>
+                                        </div>
+                                    </Col>
+                                    <Col>
+                                        <div onClick={()=> navigate("/daftar")}>
+                                            <Button value={`Daftar`}/>
+                                        </div>
+                                    </Col>
                                 </div>
                             </>
                     </div>

@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import female from "./female.svg";
 import male from "./male.svg";
-import { Col, Row } from "react-bootstrap";
+import { Col } from "react-bootstrap";
 import { IoIosArrowBack } from "react-icons/io";
-import back from "./back.svg";
+import useWindowDimensions from "../../helpers/WindowDimension";
 import "./profile.css";
 import axios from "axios";
 import { useForm } from "react-hook-form";
@@ -12,6 +12,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { home } from "../../redux/action/action.user";
 
 export default function EditProfile() {
+  let { width } = useWindowDimensions();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const data = useSelector((state) => state.userReducers);
@@ -69,7 +70,7 @@ export default function EditProfile() {
   return (
     <div className="container mt-5">
       <Link className="link" to="/akunku">
-        <div className="text-primary d-flex justify-content-start align-content-center mb-2 border-1">
+        <div className={(width > 750 ? "mt-5" : "") + " text-primary d-flex justify-content-start align-content-center mb-2 border-1"}>
           <Col className="d-flex align-items-center">
             <IoIosArrowBack></IoIosArrowBack>
           </Col>

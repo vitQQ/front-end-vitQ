@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import female from "./female.svg";
 import male from "./male.svg";
+import { Col, Row } from "react-bootstrap";
+import { IoIosArrowBack } from "react-icons/io";
 import back from "./back.svg";
 import "./profile.css";
 import axios from "axios";
@@ -67,9 +69,14 @@ export default function EditProfile() {
   return (
     <div className="container mt-5">
       <Link className="link" to="/akunku">
-        <div id="back" className="mt-5 d-flex align-items-center">
-          <img className="" src={back} alt="" />
-          <p className="fw-bold text-primary mt-3"> Kembali</p>
+        <div className="text-primary d-flex justify-content-start align-content-center mb-2 border-1">
+          <Col className="d-flex align-items-center">
+            <IoIosArrowBack></IoIosArrowBack>
+          </Col>
+          <Col className="col-6 col-md-12 px-md-3 d-flex justify-content-center justify-content-md-start align-items-center mt-1 pt-1">
+            <h5 className="fs-body fw-bold">Kembali</h5>
+          </Col>
+          <Col className="d-flex justify-content-end d-md-none text-inactive pt-2">{/* <IoHelpCircleOutline /> */}</Col>
         </div>
       </Link>
       <div id="aturProfile" className="p-5 bg-primary-3 text-white">

@@ -156,7 +156,7 @@ export default function EditProfile() {
           <div className="beratdantinggibadan my-5">
             <p className="fs-h3 fw-bold text-primary-3">Level Aktivitas atau Olahraga</p>
             <div className="row gx-5 d-flex align-items-center">
-              <div className="col-10 d-flex align-items-center">
+              <div className="col-12 col-xxl-8 col-xl-8 col-lg-8 col-md-8 d-flex align-items-center">
                 <div className="select w-100">
                   <select {...register("activity_level", { required: true })} className={errors?.activity_level ? "is-invalid form-select w-100 m-auto m-3 p-2" : "form-select w-100 m-auto m-3 p-2"}>
                     <option selected value="" disabled>
@@ -179,9 +179,11 @@ export default function EditProfile() {
                     </option>
                   </select>
                   <span className="focus"></span>
-                  <button className="w-100 p-2 my-5 btn-primary-3 text-white rounded-3" type="submit">
-                    Selesai
-                  </button>
+                  <div className="col-sm-12">
+                    <button className="w-100 p-2 my-5 btn-primary-3 text-white rounded-3 w-100" type="submit">
+                      Selesai
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

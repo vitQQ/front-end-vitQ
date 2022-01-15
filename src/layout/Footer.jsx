@@ -30,7 +30,7 @@ export default function Footer() {
               </Col>
             </Row>
           </Col>
-          <Col sm={4} lg={3} md={4} className="mt-1 mt-sm-4 text-center text-inactive">
+          <Col sm={4} lg={3} md={4} className="mt-4 mt-sm-4 mt-md-1 mt-lg-1 mt-xl-1 text-center text-inactive">
             Copyright &copy; 2022 VitQ
           </Col>
         </Row>

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import ayam from "./asset/ayam.svg";
 import "./menuKalkulasi.css";
 import Tabs from "react-bootstrap/Tabs";
@@ -26,6 +26,22 @@ export default function MenuKalkalulasi() {
   const handleClick =()=>{
     navigate('/kalkulasi/hasilkalkulasi')
   }
+
+  const [q, setQ] = useState("");
+  const [searchParam] = useState(["namaMakanan"]);
+
+  function searchFood(food) {
+    return food.filter(item => {
+      return searchParam.some(newFood => {
+        return (
+          item[newFood].
+          toString().
+          toLowerCase().
+          indexOf(q.toLowerCase()) > -1);
+      });
+    });
+  }
+
   return (
     <div className={width>750? "rootbg mt-5" : ""}>
       <div className={width>750? "container my-5" : "container"}>
@@ -58,7 +74,8 @@ export default function MenuKalkalulasi() {
                 >
                   <Tab eventKey="All" title="All">
                     <div className="row bg-primary-1 p-2 d-flex g-3">
-                        {food?.map(item => 
+                        {searchFood(food).map(item =>
+
                           <div className="px-2 col-lg-6 col-xl-4 col-xxl-4 col-md-6 col-sm-6 col-6">
                               <Cards 
                                   key={item?.id}
@@ -76,18 +93,6 @@ export default function MenuKalkalulasi() {
                           </div>
                           )}
                     </div>
-                  </Tab>
-                  <Tab eventKey="Karbohidrat" title="Karbohidrat">
-                    <p>2</p>
-                  </Tab>
-                  <Tab eventKey="Lemak" title="Lemak">
-                    <p>3</p>
-                  </Tab>
-                  <Tab eventKey="Serat" title="Serat">
-                    <p>4</p>
-                  </Tab>
-                  <Tab eventKey="Vitamin" title="Vitamin">
-                    <p>5</p>
                   </Tab>
                 </Tabs>
                 <div className="sticky-button d-lg-none" onClick={handleClick}>
@@ -108,10 +113,9 @@ export default function MenuKalkalulasi() {
                     className="mb-lg-5 mb-xl-5 mb-xxl-5 mb-0 form-control form-control-dark bg-white-100 fs-subtitle"
                     placeholder="Cari Makanan"
                     aria-label="Search"
+                    value={q}
+                    onChange={(e) => setQ(e.target.value)}
                   />
-                  <center className="py-0 my-0">
-                    <p className="my-lg-5 my-xl-5 my-xxl-5 my-0 py-xl-5 py-xxl-5 py-lg-5 py-0 d-lg-block d-xl-block d-xxl-block d-none">Yuk Cari Makanan Kamu</p>
-                  </center>
                 </form>
               </div>
               <div className="col-12 bg-white p-3 d-none d-lg-block d-xxl-block d-xl-block">
@@ -131,7 +135,8 @@ export default function MenuKalkalulasi() {
                   {kalkulasi.length!==0?
                   <Button value="Hitung"/> : <Button disabled value="Hitung"/>
                   }
-                </div>
+                </div> 
+
               </div>
             </div>
           </div>

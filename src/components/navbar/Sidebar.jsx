@@ -1,17 +1,18 @@
 import React from "react";
 import { useState } from "react";
 import { BiMenu, BiX } from "react-icons/bi";
-import { NavLink } from "react-bootstrap";
 import Button from "../button";
 import './sidebar.css';
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
+import {Col} from "react-bootstrap"
 
 export default function Sidebar(){
+    let {pathname} = useLocation()
+    const navigate = useNavigate()
     const [sidebar, setSidebar] = useState(false)
     function showSidebar(){
         setSidebar(!sidebar)
     }
-    let {pathname} = useLocation()
     return (
         <>
             <div className={pathname === '/' ? "sidebar d-flex justify-content-end d-md-none" : "d-none"}>
@@ -19,23 +20,25 @@ export default function Sidebar(){
                     {sidebar? <BiX size={40}/> : <BiMenu size={40}/>}
                 </div>
                 <div className={!sidebar? 'menu' : 'menu active'}>
-                    <div className="side-menu">
+                    <div className="side-menu px-5">
                             <>
-                                <div className="menu-item">
-                                    <a onClick={showSidebar} className='text-decoration-none text-active menu-item' href='#cara-kerja'>Cara Kerja?</a>
+                                <div className="p-2">
+                                    <a onClick={showSidebar} className='text-decoration-none text-active' href='#caraKerja'>Cara Kerja?</a>
                                 </div>
-                                <div className="menu-item">
-                                    <a onClick={showSidebar} className='text-decoration-none text-active menu-item' href='#apa-itu-vitq'>Apa itu VitQ?</a>
+                                <div className="p-2">
+                                    <a className='text-decoration-none text-active' href='#introduction'>Apa itu VitQ?</a>
                                 </div>
-                                <NavLink to='/masuk'>
-                                    <div className="menu-item">
-                                        <Button nofill value={`Masuk`}/>
-                                    </div>
-                                </NavLink>
-                                <div onClick={showSidebar} className="menu-item">
-                                    <NavLink to='/daftar'>
-                                        <Button value={`Daftar`}/>
-                                    </NavLink>
+                                <div className="d-flex justify-content-center">
+                                    <Col>
+                                        <div onClick={()=> navigate("/masuk")}>
+                                            <Button nofill value={`Masuk`}/>
+                                        </div>
+                                    </Col>
+                                    <Col>
+                                        <div onClick={()=> navigate("/daftar")}>
+                                            <Button value={`Daftar`}/>
+                                        </div>
+                                    </Col>
                                 </div>
                             </>
                     </div>

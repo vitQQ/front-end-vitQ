@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Button from "../../components/button";
 import { MessageSquare } from "react-feather";
@@ -6,11 +6,38 @@ import TREE from "../../components/tree";
 import FOOD from "../../components/foodTime";
 import "./assets/home.css";
 import gambar from "./assets/aktivitas.png";
-import {Link} from 'react-router-dom'
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { home } from "../../redux/action/action.user";
 
 export default function Home() {
-  const time = new Date().getHours()
-  console.log(time)
+  const navigate = useNavigate();
+  const time = new Date().getHours();
+  const data = useSelector((state) => state.userReducers);
+  const dispatch = useDispatch();
+
+  const { historyToday, user } = data;
+  console.log(historyToday);
+  console.log(data);
+
+  const emisi = historyToday.reduce((a, b) => a + b.jumlah_emisi, 0).toFixed(2);
+  const kalori = historyToday.reduce((a, b) => a + b.jumlah_kalori, 0);
+  const jumlahKalori = user?.result?.kaloriHarian ? user?.result?.kaloriHarian?.toFixed() : "Belum di atur";
+
+
+  const hasil = (kalori / jumlahKalori) * 100
+
+  useEffect(() => {
+    dispatch(home());
+  }, [dispatch]);
+
+  useEffect(() => {
+    const exist = localStorage.getItem("token");
+    if (!exist) {
+      return navigate("/masuk");
+    }
+  }, [navigate]);
+
   return (
     <Container fluid className="px-0">
       <div className="mt-5 py-md-5">
@@ -21,13 +48,19 @@ export default function Home() {
                 <Row>
                   <Col>
                     <div className="text-active fs-h3 fw-semibold">
-                      {time < 10 ? "Selamat Pagi" : time < 14 ? "Selamat Siang" : time < 18 ? "Selamat Sore" : "Selamat Malam"}
+                      {time < 10
+                        ? "Selamat Pagi"
+                        : time < 14
+                        ? "Selamat Siang"
+                        : time < 18
+                        ? "Selamat Sore"
+                        : "Selamat Malam"}
                     </div>
                     <div className="text-active fs-h2 fw-bold mb-3">
                       Apa yang ingin kamu lakukan?
                     </div>
                     <Col xl={3} md={4}>
-                      <Button value="Kalkulasi" />
+                      <Link to="/kalkulasi"><Button value="Kalkulasi" /></Link>
                     </Col>
                   </Col>
                 </Row>
@@ -39,7 +72,7 @@ export default function Home() {
                   </div>
                   <div className="text-center">
                     “Jumlah kalori yang perlu Anda makan mungkin bukan standar
-                    2.000.”
+                    2.000Kkal”
                   </div>
                 </div>
               </Col>
@@ -50,60 +83,74 @@ export default function Home() {
             <Row className="mx-3">
               <Col md={6} sm={12}>
                 <Row>
-                  <Col md={10} sm={12} xs={12} className="rounded p-3 border mt-5">
+                  <Col
+                    md={10}
+                    sm={12}
+                    xs={12}
+                    className="rounded p-3 border mt-5"
+                  >
                     <Row>
                       <Col sm={7} xs={7}>
                         <div className="text-active fs-h3 fw-semibold mb-2">
                           Angka Emisi kamu saat ini
                         </div>
-                        <div className="fs-h2 fw-bold mb-2">0 Emisi</div>
+                        <div className="fs-h2 fw-bold mb-2">{emisi} Emisi</div>
                         <div className="fs-caption textInActive mb-3">
-                          Asik, Emisi kamu menunjukkan hal yang baik
+                          
+                          {emisi < 1 ? "Asik, Emisi kamu menunjukkan hal yang sangat baik" : emisi < 1.5 ? "Oke, Emisi kamu menunjukan hal yang cukup baik" : emisi < 2.5 ? "Yah, Emisi kamu menunjukan hal yang kurang baik" : "Gawat, Emisi kamu menunjukan hal yang tidak baik"}
                         </div>
                       </Col>
                       <Col sm={5} xs={5} className=" rounded">
                         <div className="rounded p-3 bg-primary-1 h-100 d-flex justify-content-center flex-column align-items-center">
-                          <img src={TREE.bad} alt=""></img>
+                          <img src={ emisi < 1 ? TREE.good : emisi < 1.5 ? TREE.ok : emisi < 2.5 ? TREE.bad : TREE.terrible} alt=""></img>
                         </div>
                       </Col>
                     </Row>
                   </Col>
                 </Row>
               </Col>
-              <Col sm={12}  md={6}>
+              <Col sm={12} md={6}>
                 <Row>
-                  <Col md={10} sm={12} xs={12} className="rounded p-3 border mt-5 ms-auto">
+                  <Col
+                    md={10}
+                    sm={12}
+                    xs={12}
+                    className="rounded p-3 border mt-5 ms-auto"
+                  >
                     <Row>
                       <Col xs={5} sm={5} className="m-auto">
                         <div className="m-auto">
                           <div className="fs-body fw-semibold text-center mb-3">
                             Kalorimu per hari
                           </div>
-                          <div class="single-chart m-auto mb-3">
+                          <div className="single-chart m-auto mb-3">
                             <svg
                               viewBox="0 0 36 36"
-                              class="circular-chart green"
+                              className="circular-chart green"
                             >
                               <path
-                                class="circle-bg"
+                                className="circle-bg"
                                 d="M18 2.0845
           a 15.9155 15.9155 0 0 1 0 31.831
           a 15.9155 15.9155 0 0 1 0 -31.831"
                               />
                               <path
                                 class="circle"
-                                stroke-dasharray="30, 100"
+                                strokeDasharray={`${
+                                  isNaN(hasil) ? 0 : hasil
+                                }, 100`}
                                 d="M18 2.0845
           a 15.9155 15.9155 0 0 1 0 31.831
           a 15.9155 15.9155 0 0 1 0 -31.831"
                               />
                               <text x="18" y="20.35" className="percentage ">
-                                30%
+                                {(isNaN(hasil) ? 0 : hasil).toFixed()}%
                               </text>
                             </svg>
                           </div>
                           <div className="fs-subtitle fw-bold text-center text-primary-3">
-                            0 / 1500 Kkal
+                            {jumlahKalori !== "Belum di atur" ? `${kalori} / ${jumlahKalori} Kkal` : <Link to="/akunku/editprofil">Atur Profile Dahulu</Link>}
+                            {/* {kalori} / {jumlahKalori} Kkal */}
                           </div>
                         </div>
                       </Col>
@@ -115,28 +162,30 @@ export default function Home() {
                           <div className="fs-body fw-semibold text-center mb-3">
                             Emisimu per hari
                           </div>
-                          <div class="single-chart m-auto mb-3">
-                            <svg viewBox="0 0 36 36" class="circular-chart red">
+                          <div className="single-chart m-auto mb-3">
+                            <svg viewBox="0 0 36 36" className="circular-chart red">
                               <path
-                                class="circle-bg"
+                                className="circle-bg"
                                 d="M18 2.0845
           a 15.9155 15.9155 0 0 1 0 31.831
           a 15.9155 15.9155 0 0 1 0 -31.831"
                               />
                               <path
                                 class="circle"
-                                stroke-dasharray="30, 100"
+                                strokeDasharray={`${
+                                  (emisi / 3.05) * 100
+                                }, 100`}
                                 d="M18 2.0845
           a 15.9155 15.9155 0 0 1 0 31.831
           a 15.9155 15.9155 0 0 1 0 -31.831"
                               />
                               <text x="18" y="20.35" className="percentage ">
-                                30%
+                              {((emisi / 3.05) * 100).toFixed()}%
                               </text>
                             </svg>
                           </div>
                           <div className="fs-subtitle fw-bold text-center text-secondary-2">
-                            0 / 1500 Kkal
+                            {emisi} / {3.05} KgCO2e
                           </div>
                         </div>
                       </Col>
@@ -156,77 +205,81 @@ export default function Home() {
             <Row className="gy-3">
               <Col sm={6}>
                 <Link className="link" to="/">
-                <div className="rounded p-3 border bg-white pointer">
-                  <Row>
-                    <Col xs={6} md={4}>
-                      <div className="rounded p-3 bg-primary-1 h-100 d-flex justify-content-center flex-column align-items-center">
-                        <img src={FOOD.breakfast} alt=""></img>
-                      </div>
-                    </Col>
-                    <Col className="m-auto">
-                      <div className="fs-h3 fw-semibold">Sarapan</div>
-                      <div className="d-none d-md-block d-lg-block d-xl-block">Mulai harimu dengan makanan gizi seimbang</div>
-                    </Col>
-                  </Row>
-                </div>
-                </Link>
-              </Col>
-              <Col sm={6}>
-              <Link className="link" to="/">
-                <div className="rounded p-3 border bg-white pointer">
-                  <Row>
-                    <Col xs={6} md={4}>
-                      <div className="rounded p-3 bg-primary-1 h-100 d-flex justify-content-center flex-column align-items-center">
-                        <img src={FOOD.lunch} alt=""></img>
-                      </div>
-                    </Col>
-                    <Col className="m-auto">
-                      <div className="fs-h3 fw-semibold">Makan siang</div>
-                      <div className="d-none d-md-block d-lg-block d-xl-block">
-                        Istirahat sejenak, pilih makanan yang memiliki gizi
-                        seimbang
-                      </div>
-                    </Col>
-                  </Row>
-                </div>
-                </Link>
-              </Col>
-              <Col sm={6}>
-              <Link className="link" to="/">
-                <div className="rounded p-3 border bg-white pointer">
-                  <Row>
-                    <Col xs={6} md={4}>
-                      <div className="rounded p-3 bg-primary-1 h-100 d-flex justify-content-center flex-column align-items-center">
-                        <img src={FOOD.dinner} alt=""></img>
-                      </div>
-                    </Col>
-                    <Col className="m-auto">
-                      <div className="fs-h3 fw-semibold">Makan malam</div>
-                      <div className="d-none d-md-block d-lg-block d-xl-block">
-                        Waktunya istirahat, cermat dalam memilih makanan agar
-                        tetap sehat
-                      </div>
-                    </Col>
-                  </Row>
-                </div>
+                  <div className="rounded p-3 border bg-white pointer">
+                    <Row>
+                      <Col xs={6} md={4}>
+                        <div className="rounded p-3 bg-primary-1 h-100 d-flex justify-content-center flex-column align-items-center">
+                          <img src={FOOD.breakfast} alt=""></img>
+                        </div>
+                      </Col>
+                      <Col className="m-auto">
+                        <div className="fs-h3 fw-semibold">Sarapan</div>
+                        <div className="d-none d-md-block d-lg-block d-xl-block">
+                          Mulai harimu dengan makanan gizi seimbang
+                        </div>
+                      </Col>
+                    </Row>
+                  </div>
                 </Link>
               </Col>
               <Col sm={6}>
                 <Link className="link" to="/">
-                <div className="rounded p-3 border bg-white pointer h-100">
-                  <Row>
-                    <Col xs={6} md={4}>
-                      <div className="rounded p-3 bg-primary-1 h-100 d-flex justify-content-center flex-column align-items-center">
-                        <img src={FOOD.snack} alt=""></img>
-                      </div>
-                    </Col>
-                    <Col className="m-auto">
-                      <div className="fs-h3 fw-semibold">Cemilan</div>
-                      <div className="d-none d-md-block d-lg-block d-xl-block">Dampingi kegiatanmu dengan cemilan yang sehat</div>
-                    </Col>
-                  </Row>
-                </div>
-              </Link>
+                  <div className="rounded p-3 border bg-white pointer">
+                    <Row>
+                      <Col xs={6} md={4}>
+                        <div className="rounded p-3 bg-primary-1 h-100 d-flex justify-content-center flex-column align-items-center">
+                          <img src={FOOD.lunch} alt=""></img>
+                        </div>
+                      </Col>
+                      <Col className="m-auto">
+                        <div className="fs-h3 fw-semibold">Makan siang</div>
+                        <div className="d-none d-md-block d-lg-block d-xl-block">
+                          Istirahat sejenak, pilih makanan yang memiliki gizi
+                          seimbang
+                        </div>
+                      </Col>
+                    </Row>
+                  </div>
+                </Link>
+              </Col>
+              <Col sm={6}>
+                <Link className="link" to="/">
+                  <div className="rounded p-3 border bg-white pointer">
+                    <Row>
+                      <Col xs={6} md={4}>
+                        <div className="rounded p-3 bg-primary-1 h-100 d-flex justify-content-center flex-column align-items-center">
+                          <img src={FOOD.dinner} alt=""></img>
+                        </div>
+                      </Col>
+                      <Col className="m-auto">
+                        <div className="fs-h3 fw-semibold">Makan malam</div>
+                        <div className="d-none d-md-block d-lg-block d-xl-block">
+                          Waktunya istirahat, cermat dalam memilih makanan agar
+                          tetap sehat
+                        </div>
+                      </Col>
+                    </Row>
+                  </div>
+                </Link>
+              </Col>
+              <Col sm={6}>
+                <Link className="link" to="/">
+                  <div className="rounded p-3 border bg-white pointer h-100">
+                    <Row>
+                      <Col xs={6} md={4}>
+                        <div className="rounded p-3 bg-primary-1 h-100 d-flex justify-content-center flex-column align-items-center">
+                          <img src={FOOD.snack} alt=""></img>
+                        </div>
+                      </Col>
+                      <Col className="m-auto">
+                        <div className="fs-h3 fw-semibold">Cemilan</div>
+                        <div className="d-none d-md-block d-lg-block d-xl-block">
+                          Dampingi kegiatanmu dengan cemilan yang sehat
+                        </div>
+                      </Col>
+                    </Row>
+                  </div>
+                </Link>
               </Col>
             </Row>
           </Container>

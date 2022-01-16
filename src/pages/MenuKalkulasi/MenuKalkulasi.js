@@ -17,6 +17,7 @@ export default function MenuKalkalulasi() {
   let food = useSelector((currentState)=>currentState.foodReducers.food)
   let kalkulasi = useSelector((currentState)=>currentState.handleCalculateReducers)
   const dispatch = useDispatch()
+
   // get all Food
   useEffect(() => {
     dispatch(getFood())
@@ -40,6 +41,7 @@ export default function MenuKalkalulasi() {
       });
     });
   }
+
   return (
     <div className={width>750? "rootbg mt-5" : ""}>
       <div className={width>750? "container my-5" : "container"}>
@@ -73,6 +75,7 @@ export default function MenuKalkalulasi() {
                   <Tab eventKey="All" title="All">
                     <div className="row bg-primary-1 p-2 d-flex g-3">
                         {searchFood(food).map(item =>
+
                           <div className="px-2 col-lg-6 col-xl-4 col-xxl-4 col-md-6 col-sm-6 col-6">
                               <Cards 
                                   key={item?.id}
@@ -133,6 +136,7 @@ export default function MenuKalkalulasi() {
                   <Button value="Hitung"/> : <Button disabled value="Hitung"/>
                   }
                 </div> 
+
               </div>
             </div>
           </div>

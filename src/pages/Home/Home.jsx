@@ -22,7 +22,8 @@ export default function Home() {
 
   const emisi = historyToday.reduce((a, b) => a + b.jumlah_emisi, 0);
   const kalori = historyToday.reduce((a, b) => a + b.jumlah_kalori, 0);
-  const jumlahKalori = user?.length !== 0 ? user?.result?.kaloriHarian.toFixed() : 0;
+  const jumlahKalori = user?.result?.kaloriHarian ? user?.result?.kaloriHarian?.toFixed() : "Belum di atur";
+
 
   const hasil = (kalori / jumlahKalori) * 100
 
@@ -32,7 +33,6 @@ export default function Home() {
 
   useEffect(() => {
     const exist = localStorage.getItem("token");
-    console.log(exist);
     if (!exist) {
       return navigate("/masuk");
     }
@@ -149,7 +149,8 @@ export default function Home() {
                             </svg>
                           </div>
                           <div className="fs-subtitle fw-bold text-center text-primary-3">
-                            {kalori} / {jumlahKalori} Kkal
+                            {jumlahKalori !== "Belum di atur" ? `${kalori} / ${jumlahKalori} Kkal` : <Link to="/akunku/editprofil">Atur Profile Dahulu</Link>}
+                            {/* {kalori} / {jumlahKalori} Kkal */}
                           </div>
                         </div>
                       </Col>

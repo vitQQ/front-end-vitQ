@@ -91,18 +91,6 @@ export default function MenuKalkalulasi() {
                           )}
                     </div>
                   </Tab>
-                  <Tab eventKey="Karbohidrat" title="Karbohidrat">
-                    <p>2</p>
-                  </Tab>
-                  <Tab eventKey="Lemak" title="Lemak">
-                    <p>3</p>
-                  </Tab>
-                  <Tab eventKey="Serat" title="Serat">
-                    <p>4</p>
-                  </Tab>
-                  <Tab eventKey="Vitamin" title="Vitamin">
-                    <p>5</p>
-                  </Tab>
                 </Tabs>
                 <div className="sticky-button d-lg-none" onClick={handleClick}>
                   {kalkulasi.length!==0?

@@ -20,7 +20,7 @@ export default function Home() {
   console.log(historyToday);
   console.log(data);
 
-  const emisi = historyToday.reduce((a, b) => a + b.jumlah_emisi, 0);
+  const emisi = historyToday.reduce((a, b) => a + b.jumlah_emisi, 0).toFixed(2);
   const kalori = historyToday.reduce((a, b) => a + b.jumlah_kalori, 0);
   const jumlahKalori = user?.result?.kaloriHarian ? user?.result?.kaloriHarian?.toFixed() : "Belum di atur";
 

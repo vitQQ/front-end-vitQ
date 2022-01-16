@@ -1,18 +1,23 @@
 .menu{
+    padding:2% 0 1%;
     background-color: white;
     box-shadow: 10px 10px 20px -7px rgba(0,0,0,0.08); 
     width : 100%;
-    height : 25%;
+    height : 15%;
     position : fixed;
-    top : 10;
-    right : -100%;
+    top : -25%;
+    right:0;
+    /* right : -100%; */
     transition: 850ms;
     display : flex;
+    opacity: 0;
 }
 
 .active {
-    right: 0%;
+    /* right: 0%; */
+    top:6%;
     transition: 850ms;
+    opacity: 0.99999;
 }
 
 .side-menu{
@@ -21,7 +26,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    text-align: center;
+    text-align: left;
 }
 
 .x-icon{
@@ -29,7 +34,7 @@
 }
 
 .menu-item a:hover{
-    color: primary-3;
+    background-color: primary-3;
 }
 
 .toogler {

@@ -69,7 +69,7 @@ export default function MenuKalkalulasi() {
                                   categories={item?.categories}
                                   unit={item?.unit}
                                   cal={item?.kalori.toFixed()}
-                                  emis={item?.emisi}
+                                  emis={item?.emisi.toFixed()}
                                   pro={item?.protein}
                                   jumlah={item?.jumlah}
                               />  

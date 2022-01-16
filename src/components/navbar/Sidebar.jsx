@@ -23,10 +23,10 @@ export default function Sidebar(){
                     <div className="side-menu px-5">
                             <>
                                 <div className="p-2">
-                                    <a onClick={showSidebar} className='text-decoration-none text-active' href='#cara-kerja'>Cara Kerja?</a>
+                                    <a onClick={showSidebar} className='text-decoration-none text-active' href='#caraKerja'>Cara Kerja?</a>
                                 </div>
                                 <div className="p-2">
-                                    <a className='text-decoration-none text-active' href='#apa-itu-vitq'>Apa itu VitQ?</a>
+                                    <a className='text-decoration-none text-active' href='#introduction'>Apa itu VitQ?</a>
                                 </div>
                                 <div className="d-flex justify-content-center">
                                     <Col>

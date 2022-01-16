@@ -132,7 +132,7 @@ export default function MenuKalkalulasi() {
                   {kalkulasi.length!==0?
                   <Button value="Hitung"/> : <Button disabled value="Hitung"/>
                   }
-                </div>
+                </div> 
               </div>
             </div>
           </div>

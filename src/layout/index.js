@@ -7,6 +7,8 @@ import {useLocation} from 'react-router-dom'
 export default function Layout({children}) {
     let {pathname} = useLocation()
     let { width } = useWindowDimensions()
+    const isLoggin = localStorage.getItem("token")
+    console.log(isLoggin)
     return (
         <div className="d-flex flex-column" style={{height: "100vh"}}>
             <Navbar/>

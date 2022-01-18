@@ -5,8 +5,10 @@ import { useForm } from "react-hook-form";
 import "./daftar.css";
 import axios from "axios";
 import GoogleLogin from "react-google-login";
+import ModalLoading from "../../components/modal/ModalLoading";
 
 export default function Daftar() {
+  const [isLoading, setLoading] = useState(false);
   const [passwordShown, setPasswordShown] = useState(false);
   const {
     register,
@@ -16,6 +18,7 @@ export default function Daftar() {
   const [emailExist, setemailExist] = useState(false);
   const navigate = useNavigate();
   const onSubmit = (data) => {
+    setLoading(true)
     axios
       .post(`${process.env.REACT_APP_URL}/register`, data, {
         headers: { "Content-Type": "application/json" },
@@ -28,6 +31,7 @@ export default function Daftar() {
         }
       })
       .catch((error) => {
+        setLoading(false)
         console.log(error.data);
         setemailExist(true);
       });
@@ -76,6 +80,7 @@ export default function Daftar() {
     }
   }, [navigate]);
   return (
+    <>
     <div className="container px-0 py-3">
       <div className="row my-5 py-5">
         <div className="col-xxl-5 col-xl-5 col-lg-5 col-12 order-12 order-lg-first order-xxl-first order-xl-first order-last my-5">
@@ -206,5 +211,7 @@ export default function Daftar() {
         </div>
       </div>
     </div>
+    <ModalLoading set={isLoading} />
+    </>
   );
 }

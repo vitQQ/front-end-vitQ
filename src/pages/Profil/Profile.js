@@ -11,9 +11,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { home } from "../../redux/action/action.user";
 import Loading from "../../components/loading/loading";
+import ModalLoading from "../../components/modal/ModalLoading";
 
 export default function EditProfile() {
   const [isLoading, setLoading] = useState(true);
+  const [postLoading, setpostLoading] = useState(false);
 
   let { width } = useWindowDimensions();
   const navigate = useNavigate();
@@ -29,6 +31,7 @@ export default function EditProfile() {
   } = useForm();
 
   const onSubmit = (data) => {
+    setpostLoading(true)
     console.log(typeof data.activity_level);
     const { umur, tinggi_badan, berat_badan, activity_level } = data;
     const result = {
@@ -48,10 +51,12 @@ export default function EditProfile() {
         },
       })
       .then((response) => {
+        setpostLoading(false)
         console.log(response.data);
         alert("Berhasil Memperbarui");
       })
       .catch((error) => {
+        setpostLoading(false)
         console.log(error.message);
       });
   };
@@ -76,6 +81,7 @@ export default function EditProfile() {
       {isLoading ? (
         <Loading />
       ) : (
+        <>
         <div className="container mt-5">
           <Link className="link" to="/akunku">
             <div
@@ -348,6 +354,8 @@ export default function EditProfile() {
             </div>
           </div>
         </div>
+        <ModalLoading set={postLoading} />
+        </>
       )}
     </>
   );

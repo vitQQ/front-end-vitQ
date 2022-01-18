@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect    } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Button from "../../components/button";
 import { MessageSquare } from "react-feather";
@@ -12,7 +12,6 @@ import { home } from "../../redux/action/action.user";
 import Loading from "../../components/loading/loading";
 
 export default function Home() {
-  const [isLoading, setLoading] = useState(true);
 
   const navigate = useNavigate();
   const time = new Date().getHours();
@@ -35,11 +34,8 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(home());
-    const load = () => user?.result ? setLoading(false) : setLoading(true)
-    load()
-  }, [dispatch, user?.result]);
-
-  console.log(isLoading)
+  
+  }, [dispatch]);
 
   useEffect(() => {
     const exist = localStorage.getItem("token");
@@ -48,9 +44,12 @@ export default function Home() {
     }
   }, [navigate]);
 
+  console.log(data)
+  console.log(data.loading | data?.user)
+
   return (
     <>
-      {isLoading ? (
+      {data.loading | data?.user ? (
         <Loading />
       ) : (
         <Container fluid className="px-0">

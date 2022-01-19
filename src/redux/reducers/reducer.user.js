@@ -1,7 +1,7 @@
 const initialState = {
   user: [],
   history: [],
-  loading: false,
+  loading: undefined,
   error: null,
   historyToday: [],
   token: localStorage.getItem("token") ? localStorage.getItem("token") : null
